@@ -1,0 +1,117 @@
+.atheneum-auth-content {
+  --background: var(--atheneum-bg); // #EDE0D4
+}
+
+.auth-wrapper {
+  padding: 80px 30px 40px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.auth-header {
+  margin-bottom: 60px;
+
+  .accent-line {
+    width: 40px;
+    height: 3px;
+    background: var(--atheneum-primary);
+    margin-bottom: 16px;
+  }
+
+  .display-title {
+    font-family: var(--app-font-display);
+    font-size: 3.5rem;
+    font-weight: 800;
+    line-height: 0.9;
+    letter-spacing: -3px;
+    color: var(--atheneum-primary);
+    margin: 0;
+
+    span {
+      color: transparent;
+      -webkit-text-stroke: 1px var(--atheneum-primary);
+    }
+  }
+
+  .auth-subtitle {
+    margin-top: 12px;
+    font-size: 0.9rem;
+    font-style: italic;
+    opacity: 0.6;
+  }
+}
+
+.auth-form {
+  .input-group {
+    margin-bottom: 30px;
+
+    label {
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      color: var(--atheneum-primary);
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .input-field {
+      border-bottom: 1.5px solid var(--atheneum-primary);
+      padding: 8px 0;
+
+      input {
+        background: transparent;
+        border: none;
+        outline: none;
+        width: 100%;
+        font-family: var(--app-font-display);
+        font-size: 1.1rem;
+        color: var(--atheneum-text);
+
+        &::placeholder {
+          opacity: 0.2;
+        }
+      }
+    }
+  }
+}
+
+.auth-actions {
+  margin-top: 40px;
+
+  .btn-primary {
+    width: 100%;
+    background: var(--atheneum-primary);
+    color: var(--atheneum-bg);
+    border: none;
+    padding: 18px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    font-size: 0.9rem;
+    box-shadow: 8px 8px 0px rgba(107, 79, 79, 0.2);
+    transition: all 0.2s ease;
+
+    &:active {
+      transform: translate(4px, 4px);
+      box-shadow: 0px 0px 0px transparent;
+    }
+
+    &:disabled {
+      opacity: 0.5;
+    }
+  }
+
+  .register-link {
+    text-align: center;
+    margin-top: 24px;
+    font-size: 0.75rem;
+    opacity: 0.6;
+
+    span {
+      font-weight: 800;
+      color: var(--atheneum-primary);
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+  }
+}
