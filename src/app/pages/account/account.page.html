@@ -1,13 +1,55 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>account</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content [fullscreen]="true" class="atheneum-content">
+  <div class="account-container">
+    <header class="profile-header">
+      <div class="avatar-wrapper">
+        <div class="avatar-box">
+          <ion-icon name="person-outline"></ion-icon>
+        </div>
+      </div>
+      <div class="user-info">
+        <h2 class="user-name">{{ user()?.name }}</h2>
+        <p class="user-email">{{ user()?.email }}</p>
+        <div class="role-badge">{{ user()?.role }}</div>
+      </div>
+    </header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">account</ion-title>
-    </ion-toolbar>
-  </ion-header>
+    <section class="menu-section">
+      <div class="menu-group">
+        <div class="menu-item" (click)="navigate('profile')">
+          <ion-icon name="person-circle-outline"></ion-icon>
+          <span class="menu-label">Profil Saya</span>
+          <ion-icon name="chevron-forward-outline" class="arrow"></ion-icon>
+        </div>
+
+        <div class="menu-item" (click)="navigate('wishlist')">
+          <ion-icon name="bookmark-outline"></ion-icon>
+          <span class="menu-label">Koleksi Tersimpan</span>
+          <ion-icon name="chevron-forward-outline" class="arrow"></ion-icon>
+        </div>
+
+        <div class="menu-item" (click)="navigate('order')">
+          <ion-icon name="receipt-outline"></ion-icon>
+          <span class="menu-label">Riwayat Pesanan</span>
+          <ion-icon name="chevron-forward-outline" class="arrow"></ion-icon>
+        </div>
+
+        <div class="menu-item" (click)="navigate('address')">
+          <ion-icon name="map-outline"></ion-icon>
+          <span class="menu-label">Alamat Pengiriman</span>
+          <ion-icon name="chevron-forward-outline" class="arrow"></ion-icon>
+        </div>
+      </div>
+
+      <div class="logout-wrapper">
+        <button class="btn-logout" (click)="handleLogout()">
+          <ion-icon name="log-out-outline"></ion-icon>
+          Keluar
+        </button>
+      </div>
+    </section>
+
+    <footer class="account-footer">
+      <p>Atheneum Collective v1.0.4</p>
+    </footer>
+  </div>
 </ion-content>

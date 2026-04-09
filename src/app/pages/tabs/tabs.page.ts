@@ -6,6 +6,10 @@ import {
   gridOutline,
   bookmarkOutline,
   personOutline,
+  personCircleOutline,
+  receiptOutline,
+  logOutOutline,
+  mapOutline,
 } from 'ionicons/icons';
 
 @Component({
@@ -17,6 +21,15 @@ import {
 })
 export class TabsPage {
   constructor() {
-    addIcons({ journalOutline, gridOutline, bookmarkOutline, personOutline });
+    addIcons({
+      bookmarkOutline,
+      journalOutline,
+      gridOutline,
+      logOutOutline,
+      mapOutline,
+      personCircleOutline,
+      personOutline,
+      receiptOutline,
+    });
   }
 }

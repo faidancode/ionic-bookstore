@@ -17,6 +17,7 @@ export type UserRole = 'Administrator' | 'User';
 
 export interface CurrentUser {
   id: string;
+  name: string;
   email: string;
   role: UserRole;
   accessToken: string;
