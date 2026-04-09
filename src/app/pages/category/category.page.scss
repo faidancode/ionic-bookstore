@@ -1,0 +1,141 @@
+.atheneum-content {
+  --background: var(--atheneum-bg);
+}
+
+.page-header {
+  padding: 60px 24px 30px;
+
+  .display-title {
+    font-family: var(--app-font-display);
+    font-size: 3rem;
+    font-weight: 800;
+    line-height: 0.9;
+    letter-spacing: -2px;
+    color: var(--atheneum-primary);
+    margin: 0;
+
+    span {
+      color: transparent;
+      -webkit-text-stroke: 1px var(--atheneum-primary);
+    }
+  }
+
+  .subtitle {
+    margin-top: 12px;
+    font-size: 0.85rem;
+    opacity: 0.6;
+    font-style: italic;
+  }
+}
+
+.search-container {
+  padding: 0 24px 30px;
+
+  .search-box {
+    display: flex;
+    align-items: center;
+    background: rgba(107, 79, 79, 0.05);
+    border-bottom: 1px solid var(--atheneum-primary);
+    padding: 12px 0;
+
+    ion-icon {
+      font-size: 1.2rem;
+      margin-right: 12px;
+      color: var(--atheneum-primary);
+    }
+
+    input {
+      background: transparent;
+      border: none;
+      outline: none;
+      width: 100%;
+      font-family: var(--app-font-display);
+      font-size: 0.9rem;
+      color: var(--atheneum-text);
+
+      &::placeholder {
+        color: var(--atheneum-primary);
+        opacity: 0.4;
+      }
+    }
+  }
+}
+
+.category-list-vertical {
+  padding: 0 24px;
+
+  .category-row {
+    animation: reveal 0.6s both ease-out;
+    cursor: pointer;
+
+    &:active .row-content {
+      background: rgba(107, 79, 79, 0.05);
+      transform: translateX(5px);
+    }
+
+    .row-content {
+      display: flex;
+      align-items: center;
+      padding: 20px 0;
+      transition: all 0.3s ease;
+
+      .index {
+        font-family: var(--app-font-display);
+        font-size: 0.7rem;
+        font-weight: 800;
+        color: var(--atheneum-primary);
+        width: 40px;
+        opacity: 0.4;
+      }
+
+      .info {
+        flex: 1;
+        .name {
+          margin: 0;
+          font-family: var(--app-font-display);
+          font-weight: 700;
+          font-size: 1.1rem;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+          color: var(--atheneum-text);
+        }
+        .count {
+          margin: 4px 0 0;
+          font-size: 0.6rem;
+          font-weight: 600;
+          letter-spacing: 1px;
+          opacity: 0.5;
+        }
+      }
+
+      .arrow {
+        font-size: 1rem;
+        opacity: 0.3;
+      }
+    }
+
+    .row-divider {
+      height: 1px;
+      background: var(--atheneum-divider);
+      width: 100%;
+    }
+  }
+}
+
+.loading-state {
+  display: flex;
+  justify-content: center;
+  padding: 40px;
+  color: var(--atheneum-primary);
+}
+
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
