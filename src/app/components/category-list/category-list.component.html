@@ -1,0 +1,20 @@
+<div class="editorial-container">
+  <header class="section-header">
+    <div class="accent-line"></div>
+    <h1 class="display-title">Explore<br /><span>Categories</span></h1>
+  </header>
+
+  <div class="category-grid">
+    <div
+      class="category-item"
+      *ngFor="let category of categories(); let i = index"
+      [style.animation-delay]="i * 80 + 'ms'"
+    >
+      <div class="item-inner">
+        <span class="index-number">/0{{ i + 1 }}</span>
+        <h3 class="category-name">{{ category.name }}</h3>
+        <p class="book-count">{{ category.totalBooks }} VOLUMES</p>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,11 @@
+.books-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+
+  @media (min-width: 992px) {
+    // Desktop: 5 atau 6 kolom agar card tidak terlalu raksasa
+    grid-template-columns: repeat(6, 1fr);
+    gap: 32px;
+  }
+}

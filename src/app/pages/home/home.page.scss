@@ -1,0 +1,80 @@
+// book-home.page.scss
+
+.atheneum-content {
+  --background: var(--atheneum-bg); // #EDE0D4
+}
+
+.page-wrapper {
+  display: flex;
+  flex-direction: column; /* Ini penting agar komponen berjejer ke bawah */
+  gap: 20px; /* Memberi jarak antar komponen agar tidak menempel */
+}
+
+.masthead {
+  padding: 60px 24px 20px;
+  text-align: left;
+
+  .date-stamp {
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: var(--atheneum-primary);
+    opacity: 0.5;
+    margin-bottom: 8px;
+  }
+
+  .brand-title {
+    font-family: var(--app-font-display);
+    font-size: 3.5rem;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -3px;
+    color: var(--atheneum-text);
+    margin: 0;
+
+    span {
+      color: var(--atheneum-primary);
+    }
+  }
+
+  .tagline {
+    font-size: 0.85rem;
+    font-style: italic;
+    color: var(--atheneum-text);
+    opacity: 0.6;
+    margin-top: 8px;
+  }
+}
+
+.section-header {
+  padding: 0 24px;
+  margin: 48px 0 24px;
+
+  .label-group {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin-bottom: 12px;
+
+    .index {
+      font-family: var(--app-font-display);
+      font-weight: 800;
+      font-size: 1.2rem;
+      color: var(--atheneum-primary);
+    }
+
+    .label {
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      color: var(--atheneum-text);
+    }
+  }
+
+  .editorial-line {
+    height: 1px;
+    width: 60px; // Small, intentional line instead of 100% width
+    background: var(--atheneum-primary);
+  }
+}
+

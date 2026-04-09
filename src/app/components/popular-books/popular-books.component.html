@@ -1,0 +1,12 @@
+<div class="editorial-container">
+  <header class="section-header">
+    <div class="accent-line"></div>
+    <h1 class="display-title">Popular<br /><span>Books</span></h1>
+  </header>
+
+  <div class="books-grid">
+    <div *ngFor="let book of books(); let i = index">
+      <app-book-card [book]="book" [index]="i"></app-book-card>
+    </div>
+  </div>
+</div>

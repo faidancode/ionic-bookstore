@@ -7,17 +7,57 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./pages/login/login.page').then((m) => m.LoginPage),
   },
+
   {
-    path: 'home',
+    path: 'tabs',
     loadComponent: () =>
-      import('./pages/home/home.page').then((m) => m.HomePage),
+      import('./pages/tabs/tabs.page').then((m) => m.TabsPage),
+    children: [
+      {
+        path: 'home',
+        loadComponent: () =>
+          import('./pages/home/home.page').then((m) => m.HomePage),
+      },
+      {
+        path: 'category',
+        loadComponent: () =>
+          import('./pages/category/category.page').then((m) => m.CategoryPage),
+      },
+      {
+        path: 'wishlist',
+        loadComponent: () =>
+          import('./pages/wishlist/wishlist.page').then((m) => m.WishlistPage),
+      },
+      {
+        path: 'profile',
+        loadComponent: () =>
+          import('./pages/account/account.page').then((m) => m.AccountPage),
+        canActivate: [authGuard],
+      },
+      {
+        path: '',
+        redirectTo: 'home',
+        pathMatch: 'full',
+      },
+    ],
+  },
+
+  {
+    path: '',
+    redirectTo: 'tabs/home',
+    pathMatch: 'full',
+  },
+
+  {
+    path: '**',
+    redirectTo: 'tabs/home',
   },
   {
-    path: 'account',
-    loadComponent: () =>
-      import('./pages/account/account.page').then((m) => m.AccountPage),
-    canActivate: [authGuard],
+    path: 'wishlist',
+    loadComponent: () => import('./pages/wishlist/wishlist.page').then( m => m.WishlistPage)
   },
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: '**', redirectTo: 'home' },
+  {
+    path: 'category',
+    loadComponent: () => import('./pages/category/category.page').then( m => m.CategoryPage)
+  },
 ];

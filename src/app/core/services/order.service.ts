@@ -112,7 +112,7 @@ export class OrderService {
     const page = params?.page ?? 1;
     const pageSize = params?.pageSize ?? 10;
     const status =
-      params?.status && params.status.toUpperCase() !== 'ALL'
+      params?.status && params.status !== 'All'
         ? params.status
         : undefined;
 

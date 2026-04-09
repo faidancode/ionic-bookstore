@@ -1,7 +1,7 @@
 export interface ApiResponse<T> {
   ok: boolean;
   data: T;
-  meta: PaginationMeta;
+  meta?: PaginationMeta | null;
   error: any;
 }
 

@@ -52,6 +52,7 @@ export class CategoryService {
     return this.api.get<ApiResponse<Category[]>>(this.endpoint, params).pipe(
       tap({
         next: (res) => {
+          console.log('Fetched categories:', res);
           if (append) {
             this._categories.update((prev) => [...prev, ...res.data]);
           } else {

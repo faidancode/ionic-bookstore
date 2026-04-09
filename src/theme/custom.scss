@@ -1,0 +1,26 @@
+.editorial-container {
+  padding: var(--atheneum-gutter);
+  background: var(--atheneum-bg);
+}
+
+.section-header {
+  margin-bottom: 2rem;
+  .accent-line {
+    width: 30px;
+    height: 2px;
+    background: var(--atheneum-primary);
+    margin-bottom: 16px;
+  }
+  .display-title {
+    font-family: var(--app-font-display);
+    font-weight: 700;
+    font-size: 2rem;
+    line-height: 0.85;
+    letter-spacing: -3px;
+    color: var(--atheneum-primary);
+    span {
+      color: transparent;
+      -webkit-text-stroke: 1px var(--atheneum-primary);
+    }
+  }
+}

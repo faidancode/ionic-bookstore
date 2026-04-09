@@ -1,0 +1,19 @@
+<div class="book-card" [style.animation-delay]="index() * 50 + 'ms'">
+  <div class="cover-wrapper">
+    <img [src]="book().coverUrl" [alt]="book().title" loading="lazy" />
+    <div class="atheneum-badge">
+      <span>{{ displayPrice() }}</span>
+    </div>
+  </div>
+
+  <div class="book-info">
+    <div class="meta-row">
+      <span class="rating">★ {{ book().averageRating || "0.0" }}</span>
+      <span class="dot"></span>
+      <span class="edition">FOLIO EDITION</span>
+    </div>
+
+    <h3 class="book-title">{{ book().title }}</h3>
+    <p class="author-name">By {{ book().authorName || "Anonymous" }}</p>
+  </div>
+</div>

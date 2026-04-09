@@ -1,2 +1,35 @@
-// For information on how to create your own theme, please refer to:
-// https://ionicframework.com/docs/theming/
+@font-face {
+  font-family: "Plus Jakarta Sans";
+  src: url("../assets/fonts/plus-jakarta/PlusJakartaSans-Regular.ttf")
+    format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Plus Jakarta Sans";
+  src: url("../assets/fonts/plus-jakarta/PlusJakartaSans-Bold.ttf")
+    format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* The "Paper & Ink" Palette */
+  --atheneum-bg: #ede0d4; /* Soft paper grain */
+  --atheneum-surface: #f5ebe0; /* Slightly lighter paper */
+  --atheneum-primary: #6b4f4f; /* Muted leather/brown */
+  --atheneum-text: #2b2b2b; /* Deep charcoal ink */
+  --atheneum-accent: #8d99ae; /* Dusty library blue */
+  --atheneum-divider: rgba(107, 79, 79, 0.15);
+
+  /* Typography: Plus Jakarta Sans */
+  --app-font-display: "Plus Jakarta Sans", sans-serif;
+
+  /* Spacing & Rhythm */
+  --atheneum-gutter: 24px;
+  --atheneum-radius-sm: 2px; /* Sharp, book-like corners */
+  --atheneum-radius-md: 4px;
+}
