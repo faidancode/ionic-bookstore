@@ -1,13 +1,14 @@
 import { Component, OnInit, signal, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BookService } from 'src/app/core/services/book.service';
 import { Book } from 'src/app/core/models';
 import { addIcons } from 'ionicons';
 import { arrowBackOutline, bookmark, bookmarkOutline } from 'ionicons/icons';
 import { CartService } from 'src/app/core/services/cart.service';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { WishlistService } from 'src/app/core/services/wishlist.service';
 
 @Component({
   selector: 'app-book-detail',
@@ -18,9 +19,11 @@ import { AuthService } from 'src/app/core/services/auth.service';
 })
 export class BookDetailPage implements OnInit {
   private route = inject(ActivatedRoute);
+  private router = inject(Router);
   private readonly bookService = inject(BookService);
   private readonly authService = inject(AuthService);
   private readonly cartService = inject(CartService);
+  private readonly wishlistService = inject(WishlistService);
 
   constructor() {
     addIcons({
@@ -32,7 +35,8 @@ export class BookDetailPage implements OnInit {
 
   // State menggunakan Signal
   book = signal<Book | null>(null);
-  isWishlisted = signal(false);
+  isWishlisted = signal<boolean>(false);
+  wishlistItemId = signal<string | null>(null);
   loading = signal(false);
 
   ngOnInit() {
@@ -45,8 +49,22 @@ export class BookDetailPage implements OnInit {
 
   loadBookDetails(slug: string) {
     this.bookService.getDetail(slug).subscribe((response) => {
-      console.log({ response });
-      return this.book.set(response.data);
+      this.book.set(response.data);
+
+      // Setelah data buku didapat, cek status wishlist jika user sudah login
+      const user = this.authService.currentUser();
+      if (user && response.data) {
+        this.checkWishlist(response.data.id);
+      }
+    });
+  }
+
+  checkWishlist(bookId: string) {
+    this.wishlistService.checkWishlistStatus(bookId).subscribe((res) => {
+      this.isWishlisted.set(res.isWishlisted);
+
+      // Gunakan ?? null untuk menangani nilai undefined
+      this.wishlistItemId.set(res.wishlistItemId ?? null);
     });
   }
 
@@ -59,17 +77,12 @@ export class BookDetailPage implements OnInit {
     }).format(cents / 100);
   }
 
-  toggleWishlist() {
-    this.isWishlisted.update((v) => !v);
-  }
-
   addToCart() {
     const user = this.authService.currentUser();
     const currentBook = this.book();
 
     if (!user) {
-      console.log('Arahkan ke login atau simpan lokal');
-      // Mungkin tampilkan toast/modal login di sini
+      this.router.navigate(['/login']);
       return;
     }
 
@@ -87,6 +100,48 @@ export class BookDetailPage implements OnInit {
           console.error('Gagal menambahkan ke keranjang', err);
         },
       });
+    }
+  }
+
+  toggleWishlist() {
+    const user = this.authService.currentUser();
+    const currentBook = this.book();
+
+    if (!user) {
+      this.router.navigate(['/login']);
+      return;
+    }
+
+    if (!currentBook) return;
+
+    this.loading.set(true);
+
+    if (this.isWishlisted()) {
+      // Jika sudah ada, maka hapus
+      this.wishlistService
+        .removeBookFromWishlist(user.id, currentBook.id, {
+          wishlistItemId: this.wishlistItemId(),
+        })
+        .subscribe({
+          next: () => {
+            this.isWishlisted.set(false);
+            this.wishlistItemId.set(null);
+            this.loading.set(false);
+          },
+          error: () => this.loading.set(false),
+        });
+    } else {
+      // Jika belum ada, maka tambah
+      this.wishlistService
+        .addBookToWishlist(user.id, currentBook.id)
+        .subscribe({
+          next: () => {
+            // Re-check status untuk mendapatkan wishlistItemId terbaru
+            this.checkWishlist(currentBook.id);
+            this.loading.set(false);
+          },
+          error: () => this.loading.set(false),
+        });
     }
   }
 }

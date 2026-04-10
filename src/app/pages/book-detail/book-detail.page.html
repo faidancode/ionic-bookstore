@@ -43,6 +43,15 @@
             <span class="value">FISIK</span>
             <span class="label">Hardcover</span>
           </div>
+          <div class="divider"></div>
+          <ion-button fill="clear" (click)="toggleWishlist()">
+            <ion-icon
+              slot="icon-only"
+              [name]="isWishlisted() ? 'bookmark' : 'bookmark-outline'"
+              [color]="isWishlisted() ? 'primary' : 'medium'"
+            >
+            </ion-icon>
+          </ion-button>
         </div>
       </div>
     </section>
