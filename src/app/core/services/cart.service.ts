@@ -1,7 +1,8 @@
 import { Injectable, inject, signal } from '@angular/core';
 import { BaseApiService } from './base-api.service';
-import { ApiResponse, Cart, CartItem } from '../models';
-import { of, tap } from 'rxjs';
+import { ApiResponse, Book, Cart, CartItem } from '../models';
+import { of, tap, catchError, throwError, Observable } from 'rxjs';
+import { ToastController } from '@ionic/angular';
 
 export interface LocalCartItem {
   id: string;
@@ -34,165 +35,206 @@ export type CartMergeInput = {
 @Injectable({ providedIn: 'root' })
 export class CartService {
   private api = inject(BaseApiService);
+  private toastCtrl = inject(ToastController);
   private readonly endpoint = '/carts';
 
-  // --- State ---
+  // --- State Signals ---
   private _cart = signal<CartWithItems | null>(null);
   private _loading = signal(false);
   private _count = signal(0);
 
-  // --- Public Signals (read-only) ---
+  // --- Public Read-only Signals ---
   readonly cart = this._cart.asReadonly();
   readonly loading = this._loading.asReadonly();
   readonly count = this._count.asReadonly();
 
-  // --- Helpers ---
-  mapLocalItemsToCartInput(items: LocalCartItem[]): CartItemInput[] {
-    if (!Array.isArray(items) || items.length === 0) {
-      return [];
-    }
-    return items
-      .filter((item) => item && item.qty > 0)
-      .map((item) => ({
-        bookId: item.id,
-        quantity: item.qty,
-        priceCentsAtAdd: item.price,
-      }));
+  /**
+   * Helper untuk menampilkan pesan feedback ala 'sonner'
+   */
+  private async showToast(
+    message: string,
+    color: 'success' | 'danger' = 'success',
+  ) {
+    const toast = await this.toastCtrl.create({
+      message,
+      duration: 2000,
+      color,
+      position: 'bottom',
+      buttons: [{ text: 'OK', role: 'cancel' }],
+    });
+    await toast.present();
   }
 
-  mapServerCartItemsToLocal(items?: CartItem[]): LocalCartItem[] {
-    if (!Array.isArray(items) || items.length === 0) return [];
+  /**
+   * CORE SYNC LOGIC: Mengirim state lokal ke server.
+   * Jika gagal, melakukan ROLLBACK ke state sebelumnya.
+   */
+  private syncWithServer(
+    userId: string,
+    updatedItems: CartItemInput[],
+    prevCart: CartWithItems | null,
+  ): Observable<ApiResponse<CartWithItems>> {
+    const payload: CartMergeInput = { userId, items: updatedItems };
+    console.log('Syncing cart with server...', payload);
 
-    const localItems: LocalCartItem[] = [];
-
-    for (const item of items) {
-      if (!item) continue;
-      const id = item.bookId;
-      if (!id) continue;
-
-      localItems.push({
-        id,
-        title: item.bookTitle ?? 'Untitled',
-        slug: item.bookSlug ?? undefined,
-        author: item.bookAuthor ?? undefined,
-        price: item.priceCentsAtAdd ?? 0,
-        coverUrl: item.bookCoverUrl ?? '',
-        category: item.categoryId ?? '',
-        qty: item.quantity ?? 1,
-        cartItemId: item.id,
-      });
-    }
-
-    return localItems;
-  }
-
-  // --- Actions ---
-  replaceCart(input: CartMergeInput) {
-    if (!input?.userId) {
-      throw new Error('userId is required');
-    }
     this._loading.set(true);
     return this.api
-      .post<ApiResponse<CartWithItems>>(`${this.endpoint}`, input)
+      .post<ApiResponse<CartWithItems>>(`${this.endpoint}`, payload)
       .pipe(
-        tap({
-          next: (res) => {
-            this._cart.set(res.data ?? null);
-            this._loading.set(false);
-          },
-          error: () => this._loading.set(false),
+        tap((res) => {
+          this._cart.set(res.data ?? null);
+          // Update count manual dari jumlah item unik atau total qty
+          const totalCount =
+            res.data?.items?.reduce((acc, curr) => acc + curr.quantity, 0) || 0;
+          this._count.set(totalCount);
+          this._loading.set(false);
+        }),
+        catchError((err) => {
+          // Optimistic Rollback: Kembalikan ke state sebelum perubahan
+          this._cart.set(prevCart);
+          this._loading.set(false);
+          this.showToast(
+            err?.error?.message || 'Gagal menyinkronkan keranjang',
+            'danger',
+          );
+          return throwError(() => err);
         }),
       );
   }
 
-  // Alias untuk backward compatibility
-  syncCartWithServer(input: CartMergeInput) {
-    return this.replaceCart(input);
-  }
+  /**
+   * Menambah item ke keranjang (Optimistic)
+   */
+  addItem(userId: string, book: Book, qty: number = 1) {
+    const prevCart = this._cart();
+    const currentItems = prevCart?.items || [];
 
-  getCartByUser(userId: string) {
-    if (!userId) {
-      this._cart.set(null);
-      return of({
-        ok: true,
-        data: null,
-        meta: null,
-        error: null,
-      } as ApiResponse<CartWithItems | null>);
+    // Siapkan payload berdasarkan data saat ini
+    const updatedItemsForPayload: CartItemInput[] = currentItems.map((i) => ({
+      bookId: i.bookId,
+      quantity: i.quantity,
+      priceCentsAtAdd: i.priceCentsAtAdd,
+    }));
+
+    const existingIndex = updatedItemsForPayload.findIndex(
+      (i) => i.bookId === book.id,
+    );
+
+    if (existingIndex >= 0) {
+      updatedItemsForPayload[existingIndex].quantity += qty;
+    } else {
+      updatedItemsForPayload.push({
+        bookId: book.id,
+        quantity: qty,
+        priceCentsAtAdd: book?.priceCents,
+      });
     }
-    this._loading.set(true);
-    return this.api.get<ApiResponse<CartWithItems>>(`${this.endpoint}/detail`).pipe(
-      tap({
-        next: (res) => {
-          this._cart.set(res.data ?? null);
-          this._loading.set(false);
-        },
-        error: () => this._loading.set(false),
-      }),
+
+    return this.syncWithServer(userId, updatedItemsForPayload, prevCart).pipe(
+      tap(() => this.showToast('Buku berhasil ditambahkan')),
     );
   }
 
-  private parseCartCount(payload: unknown): number {
-    if (typeof payload === 'number') return payload;
-    if (typeof payload === 'string' && payload.trim().length > 0) {
-      const parsed = Number(payload);
-      if (!Number.isNaN(parsed)) {
-        return parsed;
-      }
+  /**
+   * Update quantity item (Digunakan di halaman Cart)
+   */
+  updateCartItemQuantity(userId: string, bookId: string, newQty: number) {
+    const prevCart = this._cart();
+    if (!prevCart) {
+      return throwError(() => new Error('Cart tidak tersedia'));
     }
-    if (payload && typeof payload === 'object') {
-      const record = payload as Record<string, unknown>;
-      const candidates = [
-        record.count,
-        record.data && typeof record.data === 'object'
-          ? (record.data as Record<string, unknown>).count
-          : undefined,
-      ];
-      for (const candidate of candidates) {
-        if (typeof candidate === 'number') {
-          return candidate;
-        }
-        if (typeof candidate === 'string' && candidate.trim().length > 0) {
-          const parsed = Number(candidate);
-          if (!Number.isNaN(parsed)) {
-            return parsed;
-          }
-        }
-      }
-    }
-    throw new Error('Invalid cart count response');
+    const updatedItemsForPayload: CartItemInput[] = (prevCart.items || [])
+      .map((i) => ({
+        bookId: i.bookId,
+        quantity: i.bookId === bookId ? newQty : i.quantity,
+        priceCentsAtAdd: i.priceCentsAtAdd,
+      }))
+      .filter((i) => i.quantity > 0);
+
+    return this.syncWithServer(userId, updatedItemsForPayload, prevCart);
   }
 
+  /**
+   * Menghapus item dari keranjang (Optimistic)
+   */
+  removeItem(userId: string, bookId: string) {
+    const prevCart = this._cart();
+    if (!prevCart) return of(null);
+
+    const updatedItemsForPayload = (prevCart.items || [])
+      .filter((i) => i.bookId !== bookId)
+      .map((i) => ({
+        bookId: i.bookId,
+        quantity: i.quantity,
+        priceCentsAtAdd: i.priceCentsAtAdd,
+      }));
+
+    return this.syncWithServer(userId, updatedItemsForPayload, prevCart).pipe(
+      tap(() => this.showToast('Item dihapus dari keranjang')),
+    );
+  }
+
+  /**
+   * Mengosongkan keranjang (Optimistic)
+   */
+  clearCart(userId: string) {
+    const prevCart = this._cart();
+    this._cart.set(null);
+    this._count.set(0);
+
+    return this.syncWithServer(userId, [], prevCart).pipe(
+      tap(() => this.showToast('Keranjang telah dikosongkan')),
+    );
+  }
+
+  /**
+   * Load data keranjang dari server (biasanya saat login atau init app)
+   */
+  getCartByUser(userId: string) {
+    if (!userId) {
+      this._cart.set(null);
+      this._count.set(0);
+      return throwError(() => new Error('User ID tidak valid'));
+    }
+
+    this._loading.set(true);
+    return this.api
+      .get<ApiResponse<CartWithItems>>(`${this.endpoint}/detail`)
+      .pipe(
+        tap((res) => {
+          this._cart.set(res.data ?? null);
+          const totalCount =
+            res.data?.items?.reduce((acc, curr) => acc + curr.quantity, 0) || 0;
+          this._count.set(totalCount);
+          this._loading.set(false);
+        }),
+        catchError((err) => {
+          this._loading.set(false);
+          return throwError(() => err);
+        }),
+      );
+  }
+
+  /**
+   * Mendapatkan jumlah item di keranjang secara spesifik dari server
+   */
   getCartCount(userId?: string) {
     if (!userId) {
       this._count.set(0);
       return of(0);
     }
-    return this.api.get<unknown>(`${this.endpoint}/count`).pipe(
+    return this.api.get<any>(`${this.endpoint}/count`).pipe(
       tap((payload) => {
-        this._count.set(this.parseCartCount(payload));
+        const count = this.parseCartCount(payload);
+        this._count.set(count);
       }),
     );
   }
 
-  updateCartItemQuantity(itemId: string, quantity: number) {
-    if (!itemId) {
-      throw new Error('itemId is required');
-    }
-    this._loading.set(true);
-    return this.api
-      .patch<ApiResponse<CartWithItems>>(
-        `${this.endpoint}/items/${encodeURIComponent(itemId)}`,
-        { quantity },
-      )
-      .pipe(
-        tap({
-          next: (res) => {
-            this._cart.set(res.data ?? null);
-            this._loading.set(false);
-          },
-          error: () => this._loading.set(false),
-        }),
-      );
+  private parseCartCount(payload: any): number {
+    if (typeof payload === 'number') return payload;
+    if (payload?.data?.count !== undefined) return payload.data.count;
+    if (payload?.count !== undefined) return payload.count;
+    return 0;
   }
 }

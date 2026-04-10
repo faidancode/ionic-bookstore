@@ -13,7 +13,7 @@ export interface PaginationMeta {
 }
 
 // --- Auth ---
-export type UserRole = 'Administrator' | 'User';
+export type UserRole = 'ADMINISTRATOR' | 'CUSTOMER';
 
 export interface CurrentUser {
   id: string;
@@ -95,7 +95,7 @@ export interface Book {
   authorName?: string | null;
   description?: string | null;
   coverUrl?: string | null;
-  priceCents?: number;
+  priceCents: number;
   categoryId?: string;
   averageRating?: number;
   totalReviews?: number;

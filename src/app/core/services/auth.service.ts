@@ -20,7 +20,7 @@ export class AuthService {
   readonly currentUser = this._currentUser.asReadonly();
   readonly isLoggedIn = computed(() => this._currentUser() !== null);
   readonly isAdmin = computed(
-    () => this._currentUser()?.role === 'Administrator',
+    () => this._currentUser()?.role === 'ADMINISTRATOR',
   );
   readonly accessToken = computed(
     () => this._currentUser()?.accessToken ?? null,
@@ -69,7 +69,10 @@ export class AuthService {
   // --- Helpers ---
   private saveAuthenticatedUser(res: any) {
     const user: CurrentUser = {
-      ...res.user,
+      id: res.userId,
+      name: res.user.name,
+      email: res.user.email,
+      role: res.role,
       accessToken: res.accessToken,
       refreshToken: res.refreshToken,
     };

@@ -5,7 +5,9 @@ import { ActivatedRoute } from '@angular/router';
 import { BookService } from 'src/app/core/services/book.service';
 import { Book } from 'src/app/core/models';
 import { addIcons } from 'ionicons';
-import { arrowBackOutline, bookmarkOutline } from 'ionicons/icons';
+import { arrowBackOutline, bookmark, bookmarkOutline } from 'ionicons/icons';
+import { CartService } from 'src/app/core/services/cart.service';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-book-detail',
@@ -17,9 +19,12 @@ import { arrowBackOutline, bookmarkOutline } from 'ionicons/icons';
 export class BookDetailPage implements OnInit {
   private route = inject(ActivatedRoute);
   private readonly bookService = inject(BookService);
+  private readonly authService = inject(AuthService);
+  private readonly cartService = inject(CartService);
 
   constructor() {
     addIcons({
+      bookmark,
       bookmarkOutline,
       arrowBackOutline,
     });
@@ -28,6 +33,7 @@ export class BookDetailPage implements OnInit {
   // State menggunakan Signal
   book = signal<Book | null>(null);
   isWishlisted = signal(false);
+  loading = signal(false);
 
   ngOnInit() {
     console.log('BookDetailPage initialized');
@@ -58,7 +64,29 @@ export class BookDetailPage implements OnInit {
   }
 
   addToCart() {
-    console.log('Menambahkan ke keranjang:', this.book()?.title);
-    // Logika cart service
+    const user = this.authService.currentUser();
+    const currentBook = this.book();
+
+    if (!user) {
+      console.log('Arahkan ke login atau simpan lokal');
+      // Mungkin tampilkan toast/modal login di sini
+      return;
+    }
+
+    if (currentBook) {
+      this.loading.set(true);
+
+      // Kirim currentBook secara utuh dan tentukan quantity (misal: 1)
+      this.cartService.addItem(user.id, currentBook, 1).subscribe({
+        next: () => {
+          this.loading.set(false);
+          console.log('Berhasil ditambahkan ke keranjang');
+        },
+        error: (err) => {
+          this.loading.set(false);
+          console.error('Gagal menambahkan ke keranjang', err);
+        },
+      });
+    }
   }
 }

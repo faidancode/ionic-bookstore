@@ -1,0 +1,74 @@
+<ion-content [fullscreen]="true" class="atheneum-content">
+  <div class="cart-wrapper">
+    <header class="cart-header">
+      <h1 class="display-title">Tas<br /><span>Belanja</span></h1>
+      <p class="item-count">{{ cart()?.items?.length || 0 }} ITEM TERPILIH</p>
+    </header>
+
+    <div class="mobile-layout ion-hide-md-up">
+      @for (item of cart()?.items; track item.id) {
+      <div class="cart-item-mobile">
+        <img [src]="item.bookCoverUrl" class="item-thumb" />
+        <div class="item-info">
+          <h3 class="title">{{ item.bookTitle }}</h3>
+          <p class="price">{{ formatPrice(item.priceCentsAtAdd) }}</p>
+          <div class="qty-control">
+            <button (click)="updateQty(item.bookId, item.quantity - 1)">-</button>
+            <span>{{ item.quantity }}</span>
+            <button (click)="updateQty(item.bookId, item.quantity + 1)">+</button>
+          </div>
+        </div>
+      </div>
+      }
+    </div>
+
+    <div class="desktop-layout ion-hide-md-down">
+      <table class="atheneum-table">
+        <thead>
+          <tr>
+            <th>PRODUK</th>
+            <th>HARGA</th>
+            <th>JUMLAH</th>
+            <th>SUBTOTAL</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (item of cart()?.items; track item.id) {
+          <tr>
+            <td class="product-cell">
+              <img [src]="item.bookCoverUrl" />
+              <div>
+                <p class="title">{{ item.bookTitle }}</p>
+                <p class="author">{{ item.bookAuthor }}</p>
+              </div>
+            </td>
+            <td>{{ formatPrice(item.priceCentsAtAdd) }}</td>
+            <td>
+              <div class="qty-control">
+                <button (click)="updateQty(item.bookId, item.quantity - 1)">
+                  -
+                </button>
+                <span>{{ item.quantity }}</span>
+                <button (click)="updateQty(item.bookId, item.quantity + 1)">
+                  +
+                </button>
+              </div>
+            </td>
+            <td class="bold">
+              {{ formatPrice(item.priceCentsAtAdd * item.quantity) }}
+            </td>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+
+    <div class="cart-summary">
+      <div class="summary-line">
+        <span>TOTAL PEMBAYARAN</span>
+        <h2 class="total-amount">{{ formatPrice(totalBayar()) }}</h2>
+      </div>
+      <button class="btn-checkout">LANJUT KE PEMBAYARAN</button>
+    </div>
+  </div>
+</ion-content>

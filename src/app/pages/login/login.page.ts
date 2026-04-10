@@ -34,6 +34,7 @@ export class LoginPage {
     this.authService.login(payload).subscribe({
       next: (res) => {
         this.loading.set(false);
+        console.log('Login berhasil:', res);
         // Navigasi sudah ditangani oleh AuthService via tap()
       },
       error: (err) => {
