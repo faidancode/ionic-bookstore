@@ -8,10 +8,11 @@
       ></ion-back-button>
     </ion-buttons>
     <ion-buttons slot="end">
-      <ion-button (click)="toggleWishlist()">
-        <ion-icon
-          [name]="isWishlisted() ? 'bookmark' : 'bookmark-outline'"
-        ></ion-icon>
+      <ion-button (click)="goToCart()" class="cart-btn">
+        <ion-icon name="bag-handle-outline"></ion-icon>
+        <span class="cart-badge" *ngIf="cartCount() > 0"
+          >{{ cartCount() }}</span
+        >
       </ion-button>
     </ion-buttons>
   </ion-toolbar>

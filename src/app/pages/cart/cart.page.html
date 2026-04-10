@@ -1,3 +1,19 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="editorial-toolbar">
+    <ion-buttons slot="start">
+      <ion-back-button
+        defaultHref="/tabs/home"
+        text=""
+        icon="arrow-back-outline"
+      ></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button (click)="toWishlist()" class="cart-btn">
+        <ion-icon name="bookmark-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
 <ion-content [fullscreen]="true" class="atheneum-content">
   <div class="cart-wrapper">
     <header class="cart-header">
@@ -13,9 +29,13 @@
           <h3 class="title">{{ item.bookTitle }}</h3>
           <p class="price">{{ formatPrice(item.priceCentsAtAdd) }}</p>
           <div class="qty-control">
-            <button (click)="updateQty(item.bookId, item.quantity - 1)">-</button>
+            <button (click)="updateQty(item.bookId, item.quantity - 1)">
+              -
+            </button>
             <span>{{ item.quantity }}</span>
-            <button (click)="updateQty(item.bookId, item.quantity + 1)">+</button>
+            <button (click)="updateQty(item.bookId, item.quantity + 1)">
+              +
+            </button>
           </div>
         </div>
       </div>

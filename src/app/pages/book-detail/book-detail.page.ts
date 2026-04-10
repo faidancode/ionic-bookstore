@@ -1,13 +1,18 @@
-import { Component, OnInit, signal, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IonicModule } from '@ionic/angular';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BookService } from 'src/app/core/services/book.service';
-import { Book } from 'src/app/core/models';
+import { IonicModule } from '@ionic/angular';
 import { addIcons } from 'ionicons';
-import { arrowBackOutline, bookmark, bookmarkOutline } from 'ionicons/icons';
-import { CartService } from 'src/app/core/services/cart.service';
+import {
+  arrowBackOutline,
+  bagHandleOutline,
+  bookmark,
+  bookmarkOutline
+} from 'ionicons/icons';
+import { Book } from 'src/app/core/models';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { BookService } from 'src/app/core/services/book.service';
+import { CartService } from 'src/app/core/services/cart.service';
 import { WishlistService } from 'src/app/core/services/wishlist.service';
 
 @Component({
@@ -30,6 +35,7 @@ export class BookDetailPage implements OnInit {
       bookmark,
       bookmarkOutline,
       arrowBackOutline,
+      bagHandleOutline,
     });
   }
 
@@ -38,6 +44,7 @@ export class BookDetailPage implements OnInit {
   isWishlisted = signal<boolean>(false);
   wishlistItemId = signal<string | null>(null);
   loading = signal(false);
+  cartCount = this.cartService.count;
 
   ngOnInit() {
     console.log('BookDetailPage initialized');
@@ -101,6 +108,10 @@ export class BookDetailPage implements OnInit {
         },
       });
     }
+  }
+
+  goToCart() {
+    this.router.navigate(['/cart']);
   }
 
   toggleWishlist() {

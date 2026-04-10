@@ -24,3 +24,30 @@
     }
   }
 }
+
+.editorial-toolbar {
+  --background: var(--atheneum-bg);
+  --color: var(--atheneum-primary);
+  padding: 0 10px;
+
+  ion-button {
+    --color: var(--atheneum-primary);
+    font-size: 1.2rem;
+    position: relative; // Untuk posisi badge
+  }
+}
+
+.cart-badge {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  background: var(--atheneum-primary);
+  color: var(--atheneum-bg);
+  font-size: 0.6rem;
+  font-weight: 800;
+  padding: 2px 4px;
+  min-width: 15px;
+  text-align: center;
+  // Gunakan kotak tipis agar senada dengan desain "Atheneum"
+  border: 1px solid var(--atheneum-bg);
+}

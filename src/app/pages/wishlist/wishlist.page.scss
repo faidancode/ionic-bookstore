@@ -1,0 +1,63 @@
+.wishlist-container {
+  padding: 60px 20px;
+}
+
+.page-header {
+  margin-bottom: 40px;
+  .display-title {
+    font-family: var(--app-font-display);
+    font-size: 3rem;
+    font-weight: 800;
+    line-height: 0.9;
+    color: var(--atheneum-primary);
+    span {
+      -webkit-text-stroke: 1px var(--atheneum-primary);
+      color: transparent;
+    }
+  }
+  .subtitle {
+    margin-top: 12px;
+    font-size: 0.85rem;
+    font-style: italic;
+    opacity: 0.6;
+  }
+}
+
+.book-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); // 2 kolom di mobile
+  gap: 20px;
+
+  @media (min-width: 992px) {
+    grid-template-columns: repeat(4, 1fr); // 4 kolom di desktop
+  }
+}
+
+.empty-state {
+  text-align: center;
+  padding: 100px 40px;
+  ion-icon {
+    font-size: 4rem;
+    color: var(--atheneum-primary);
+    opacity: 0.2;
+  }
+  p {
+    margin: 20px 0;
+    font-size: 0.9rem;
+    opacity: 0.6;
+  }
+  .btn-outline {
+    background: transparent;
+    border: 1.5px solid var(--atheneum-primary);
+    padding: 12px 24px;
+    font-weight: 800;
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+  }
+}
+
+.loading-center {
+  display: flex;
+  justify-content: center;
+  padding: 40px;
+}
