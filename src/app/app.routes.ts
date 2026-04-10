@@ -7,7 +7,6 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./pages/login/login.page').then((m) => m.LoginPage),
   },
-
   {
     path: 'tabs',
     loadComponent: () =>
@@ -41,7 +40,23 @@ export const routes: Routes = [
       },
     ],
   },
-
+  {
+    path: 'wishlist',
+    loadComponent: () =>
+      import('./pages/wishlist/wishlist.page').then((m) => m.WishlistPage),
+  },
+  {
+    path: 'category',
+    loadComponent: () =>
+      import('./pages/category/category.page').then((m) => m.CategoryPage),
+  },
+  {
+    path: 'book-detail/:slug',
+    loadComponent: () =>
+      import('./pages/book-detail/book-detail.page').then(
+        (m) => m.BookDetailPage,
+      ),
+  },
   {
     path: '',
     redirectTo: 'tabs/home',
@@ -51,13 +66,5 @@ export const routes: Routes = [
   {
     path: '**',
     redirectTo: 'tabs/home',
-  },
-  {
-    path: 'wishlist',
-    loadComponent: () => import('./pages/wishlist/wishlist.page').then( m => m.WishlistPage)
-  },
-  {
-    path: 'category',
-    loadComponent: () => import('./pages/category/category.page').then( m => m.CategoryPage)
   },
 ];

@@ -1,0 +1,67 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="editorial-toolbar">
+    <ion-buttons slot="start">
+      <ion-back-button
+        defaultHref="/tabs/home"
+        text=""
+        icon="arrow-back-outline"
+      ></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button (click)="toggleWishlist()">
+        <ion-icon
+          [name]="isWishlisted() ? 'bookmark' : 'bookmark-outline'"
+        ></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="atheneum-content">
+  <div class="book-detail-wrapper" *ngIf="book()">
+    <section class="hero-section">
+      <div class="cover-container">
+        <div class="book-shadow-box">
+          <img [src]="book()?.coverUrl" [alt]="book()?.title" />
+        </div>
+      </div>
+
+      <div class="main-meta">
+        <div class="category-label">EDISI TERBATAS</div>
+        <h1 class="book-title">{{ book()?.title }}</h1>
+        <p class="author-name">
+          Karya {{ book()?.authorName || 'Penulis Anonim' }}
+        </p>
+
+        <div class="stats-row">
+          <div class="stat">
+            <span class="value">★ {{ book()?.averageRating || 0 }}</span>
+            <span class="label">{{ book()?.totalReviews || 0 }} Ulasan</span>
+          </div>
+          <div class="divider"></div>
+          <div class="stat">
+            <span class="value">FISIK</span>
+            <span class="label">Hardcover</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="description-section">
+      <h2 class="section-title">Sinopsis</h2>
+      <div class="description-text" [innerHTML]="book()?.description"></div>
+    </section>
+
+    <div class="spacer"></div>
+  </div>
+</ion-content>
+
+<ion-footer class="ion-no-border">
+  <div class="purchase-bar">
+    <div class="price-info">
+      <span class="label">HARGA SATUAN</span>
+      <h3 class="price">{{ formatPrice(book()?.priceCents) }}</h3>
+    </div>
+    <button class="btn-buy" (click)="addToCart()">TAMBAH KE KERANJANG</button>
+  </div>
+</ion-footer>

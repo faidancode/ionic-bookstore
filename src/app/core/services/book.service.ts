@@ -10,6 +10,7 @@ export class BookService {
 
   // --- State ---
   private _books = signal<Book[]>([]);
+  private _selectedBook = signal<Book | null>(null); // State baru untuk detail
   private _loading = signal(false);
   private _total = signal(0);
   private _page = signal(1);
@@ -23,6 +24,7 @@ export class BookService {
 
   // --- Public Signals (read-only) ---
   readonly books = this._books.asReadonly();
+  readonly selectedBook = this._selectedBook.asReadonly(); // Public access
   readonly loading = this._loading.asReadonly();
   readonly total = this._total.asReadonly();
   readonly page = this._page.asReadonly();
@@ -88,6 +90,7 @@ export class BookService {
 
   getDetail(idOrSlug: string, userId?: string) {
     if (!idOrSlug) {
+      this._selectedBook.set(null);
       return of({
         ok: true,
         data: null,
@@ -96,10 +99,40 @@ export class BookService {
       } as ApiResponse<Book | null>);
     }
 
+    this._loading.set(true);
     const params = userId ? { userId } : undefined;
-    return this.api.get<ApiResponse<Book>>(
-      `${this.endpoint}/${idOrSlug}`,
-      params,
-    );
+
+    return this.api
+      .get<ApiResponse<Book>>(`${this.endpoint}/${idOrSlug}`, params)
+      .pipe(
+        tap({
+          next: (res) => {
+            if (res.data) {
+              this._selectedBook.set(res.data);
+            }
+            this._loading.set(false);
+          },
+          error: () => {
+            this._loading.set(false);
+            this._selectedBook.set(null);
+          },
+        }),
+      );
+  }
+
+  /**
+   * Helper untuk mengupdate state _selectedBook secara manual dari komponen
+   * Berguna jika data sudah ada di list dan ingin langsung ditampilkan
+   * tanpa hit API lagi (Optimistic UI).
+   */
+  setSelectedBook(book: Book | null) {
+    this._selectedBook.set(book);
+  }
+
+  /**
+   * Membersihkan data detail (misalnya saat meninggalkan halaman)
+   */
+  clearSelectedBook() {
+    this._selectedBook.set(null);
   }
 }

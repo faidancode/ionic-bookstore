@@ -1,0 +1,148 @@
+.editorial-toolbar {
+  --background: var(--atheneum-bg);
+  --color: var(--atheneum-primary);
+}
+
+.book-detail-wrapper {
+  padding: 20px 24px;
+}
+
+.hero-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 40px;
+
+  .cover-container {
+    perspective: 1000px;
+    margin-bottom: 30px;
+
+    .book-shadow-box {
+      width: 200px;
+      aspect-ratio: 1 / 1.5;
+      border: 1px solid var(--atheneum-primary);
+      box-shadow: 15px 15px 0px var(--atheneum-primary);
+      background: #d9d9d9;
+      transform: rotateY(-5deg); // Efek 3D tipis seperti buku berdiri
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+  }
+
+  .main-meta {
+    .category-label {
+      font-size: 0.6rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      color: var(--atheneum-primary);
+      margin-bottom: 8px;
+    }
+
+    .book-title {
+      font-family: var(--app-font-display);
+      font-size: 2rem;
+      font-weight: 800;
+      line-height: 1.1;
+      margin: 0;
+      color: var(--atheneum-text);
+      text-transform: uppercase;
+    }
+
+    .author-name {
+      font-size: 0.9rem;
+      font-style: italic;
+      margin: 10px 0 20px;
+      opacity: 0.6;
+    }
+  }
+}
+
+.stats-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+
+  .stat {
+    display: flex;
+    flex-direction: column;
+    .value {
+      font-weight: 800;
+      font-size: 0.9rem;
+      color: var(--atheneum-primary);
+    }
+    .label {
+      font-size: 0.65rem;
+      opacity: 0.5;
+      text-transform: uppercase;
+    }
+  }
+
+  .divider {
+    width: 1px;
+    height: 25px;
+    background: var(--atheneum-divider);
+  }
+}
+
+.description-section {
+  margin-top: 40px;
+  .section-title {
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    color: var(--atheneum-primary);
+  }
+  .description-text {
+    font-size: 1rem;
+    line-height: 1.8; // Sangat penting untuk kenyamanan membaca
+    color: var(--atheneum-text);
+    opacity: 0.8;
+  }
+}
+
+.spacer {
+  height: 100px;
+}
+
+// Fixed Purchase Bar
+.purchase-bar {
+  background: var(--atheneum-text);
+  padding: 20px 24px 35px; // Padding bawah lebih besar untuk area aman HP modern
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .price-info {
+    .label {
+      font-size: 0.55rem;
+      color: white;
+      opacity: 0.5;
+      letter-spacing: 1px;
+    }
+    .price {
+      margin: 0;
+      color: white;
+      font-weight: 800;
+      font-size: 1.2rem;
+    }
+  }
+
+  .btn-buy {
+    background: var(--atheneum-bg);
+    color: var(--atheneum-text);
+    border: none;
+    padding: 14px 20px;
+    font-weight: 800;
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    box-shadow: 4px 4px 0px var(--atheneum-primary);
+  }
+}
