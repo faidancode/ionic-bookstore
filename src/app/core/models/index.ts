@@ -174,15 +174,17 @@ export interface OrderAddressSnapshot {
 export interface OrderItem {
   id: string;
   bookId: string;
-  title?: string | null;
-  priceCents?: number;
+  titleSnapshot?: string | null;
+  unitPriceCents?: number;
   quantity?: number;
+  totalCents?: number;
 }
 
 export interface Order {
   id: string;
   userId?: string;
   status?: string;
+  orderNumber?: string;
   totalCents?: number;
   shippingCents?: number;
   discountCents?: number;

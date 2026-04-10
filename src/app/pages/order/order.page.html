@@ -1,0 +1,56 @@
+<app-header
+  title="Riwayat Pesanan"
+  backHref="/tabs/account"
+  [showEndButton]="false"
+>
+</app-header>
+<ion-content [fullscreen]="true" class="atheneum-content">
+  <div class="main-container">
+    @if (loading() && !orders().length) {
+    <div class="loading-center">
+      <ion-spinner name="lines-sharp"></ion-spinner>
+    </div>
+    } @else {
+    <div class="order-list">
+      @for (order of orders(); track order.id) {
+      <div class="order-card" (click)="goToDetail(order.id)">
+        <div class="card-header">
+          <span class="order-date"
+            >{{ order.createdAt | date:'dd MMM yyyy' }}</span
+          >
+          <span class="badge-status" [ngClass]="order.status?.toLowerCase()">
+            {{ order.status }}
+          </span>
+        </div>
+
+        <div class="card-body">
+          <p class="order-id">#{{ order.orderNumber }}</p>
+          <h3 class="book-summary">
+            {{ order.items?.[0]?.titleSnapshot || 'Buku' }} @if
+            ((order.items?.length || 0) > 1) {
+            <span class="more-items"
+              >+{{ (order.items?.length || 0) - 1 }} lainnya</span
+            >
+            }
+          </h3>
+        </div>
+
+        <div class="card-footer">
+          <span class="label">TOTAL TAGIHAN</span>
+          <span class="total-price">{{ formatPrice(order.totalCents) }}</span>
+        </div>
+      </div>
+      }
+    </div>
+    }
+
+    <ion-infinite-scroll
+      (ionInfinite)="loadMore($event)"
+      [disabled]="!hasMore()"
+    >
+      <ion-infinite-scroll-content
+        loadingSpinner="lines-sharp"
+      ></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </div>
+</ion-content>

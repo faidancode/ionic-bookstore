@@ -1,5 +1,5 @@
 .book-card {
-  --atheneum-shadow: var(--atheneum-primary, #997d7d);
+  --atheneum-shadow: var(--atheneum-divider);
 
   display: flex;
   flex-direction: column;
@@ -18,7 +18,7 @@
     aspect-ratio: 1 / 1.4; // Classic book proportion
     border: 1px solid var(--atheneum-shadow);
     background: #d9d9d9; // Placeholder paper tone
-    box-shadow: 10px 10px 0px var(--atheneum-shadow);
+    box-shadow: 6px 6px 0px var(--atheneum-shadow);
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     overflow: hidden;
 
@@ -34,7 +34,7 @@
       position: absolute;
       top: 0;
       right: 0;
-      background: var(--atheneum-shadow);
+      background: var(--atheneum-primary);
       color: var(--atheneum-bg, #ede0d4);
       padding: 4px 10px;
       font-family: var(--app-font-display);

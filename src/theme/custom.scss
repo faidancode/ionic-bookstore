@@ -1,6 +1,10 @@
-.editorial-container {
+.main-container {
   padding: var(--atheneum-gutter);
-  background: var(--atheneum-bg);
+  background: var(--atheneum-surface);
+}
+
+.atheneum-content {
+  --background: var(--atheneum-surface);
 }
 
 .section-header {
@@ -29,6 +33,7 @@
   --background: var(--atheneum-bg);
   --color: var(--atheneum-primary);
   padding: 0 10px;
+  border-bottom: 1px solid var(--atheneum-divider);
 
   ion-button {
     --color: var(--atheneum-primary);
@@ -50,4 +55,30 @@
   text-align: center;
   // Gunakan kotak tipis agar senada dengan desain "Atheneum"
   border: 1px solid var(--atheneum-bg);
+}
+
+.badge-status {
+  font-size: 0.6rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  padding: 4px 10px;
+  text-transform: uppercase;
+  border: 1px solid currentColor;
+
+  &.pending {
+    color: #d4a373;
+  }
+  &.processing {
+    color: #3a5a40;
+  }
+  &.shipped {
+    color: #2196f3;
+  }
+  &.completed {
+    color: #6b4f4f;
+    background: rgba(107, 79, 79, 0.05);
+  }
+  &.cancelled {
+    color: #e63946;
+  }
 }

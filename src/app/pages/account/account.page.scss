@@ -81,6 +81,11 @@
         color: var(--atheneum-text);
       }
 
+      .logout-label {
+        color: var(--ion-color-danger);
+        font-weight: 600;
+      }
+
       .arrow {
         font-size: 1rem;
         opacity: 0.3;
@@ -99,7 +104,7 @@
     border: 1.5px solid #e63946; // Sedikit sentuhan merah yang lembut
     color: #e63946;
     padding: 16px;
-    font-weight: 800;
+    font-weight: 600;
     font-size: 0.8rem;
     letter-spacing: 2px;
     display: flex;

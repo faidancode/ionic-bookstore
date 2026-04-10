@@ -1,19 +1,11 @@
-<ion-header class="ion-no-border">
-  <ion-toolbar class="editorial-toolbar">
-    <ion-buttons slot="start">
-      <ion-back-button
-        defaultHref="/tabs/home"
-        text=""
-        icon="arrow-back-outline"
-      ></ion-back-button>
-    </ion-buttons>
-    <ion-buttons slot="end">
-      <ion-button (click)="toWishlist()" class="cart-btn">
-        <ion-icon name="bookmark-outline"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
+<app-header
+  title="Keranjang Belanja"
+  backHref="/tabs/home"
+  [showEndButton]="true"
+  endIcon="bookmark-outline"
+  (onEndButtonClick)="toWishlist()"
+>
+</app-header>
 <ion-content [fullscreen]="true" class="atheneum-content">
   <div class="cart-wrapper">
     <header class="cart-header">

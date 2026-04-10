@@ -1,0 +1,230 @@
+.detail-container {
+  padding: 24px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Banner Status di bagian atas */
+.status-banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px;
+  border: 1.5px solid var(--atheneum-primary);
+  background: var(--atheneum-surface);
+  box-shadow: 8px 8px 0px var(--atheneum-divider);
+  margin-bottom: 40px;
+  gap: 20px;
+
+  .label {
+    display: block;
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    opacity: 0.5;
+    margin-bottom: 8px;
+    color: var(--atheneum-text);
+  }
+
+  .banner-left {
+    flex: 1;
+    text-align: left;
+
+    .order-number {
+      font-family: var(--app-font-display);
+      font-size: 2.2rem; // Ukuran besar untuk fokus utama
+      font-weight: 800;
+      margin: 0;
+      line-height: 1;
+      color: var(--atheneum-primary);
+    }
+  }
+
+  .banner-right {
+    text-align: right;
+    padding-left: 20px;
+    border-left: 1px solid var(--atheneum-divider); // Garis pemisah vertikal
+
+    .status-text {
+      font-size: 0.85rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 6px 12px;
+      background: var(--atheneum-primary);
+      color: var(--atheneum-bg); // Kontras tinggi untuk status
+    }
+  }
+
+  /* Variasi Warna Berdasarkan Status */
+  &.pending {
+    border-color: #d4a373;
+    box-shadow: 8px 8px 0px #d4a373;
+    .banner-right .status-text {
+      background: #d4a373;
+    }
+    .banner-left .order-number {
+      color: #d4a373;
+    }
+  }
+
+  &.completed {
+    border-color: #3a5a40;
+    box-shadow: 8px 8px 0px #3a5a40;
+    .banner-right .status-text {
+      background: #3a5a40;
+    }
+    .banner-left .order-number {
+      color: #3a5a40;
+    }
+  }
+
+  &.cancelled {
+    border-color: #e63946;
+    box-shadow: 8px 8px 0px #e63946;
+    .banner-right .status-text {
+      background: #e63946;
+    }
+    .banner-left .order-number {
+      color: #e63946;
+    }
+  }
+}
+
+/* Responsif untuk layar sangat kecil */
+@media (max-width: 360px) {
+  .status-banner {
+    flex-direction: column;
+    align-items: flex-start;
+
+    .banner-right {
+      text-align: left;
+      padding-left: 0;
+      padding-top: 15px;
+      border-left: none;
+      border-top: 1px solid var(--atheneum-divider);
+      width: 100%;
+    }
+  }
+}
+
+/* Section Styling */
+.info-section {
+  margin-bottom: 35px;
+
+  .section-title {
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    border-bottom: 2px solid var(--atheneum-primary);
+    padding-bottom: 8px;
+    margin-bottom: 16px;
+    color: var(--atheneum-primary);
+  }
+}
+
+/* Address Box */
+.address-box {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--atheneum-text);
+
+  strong {
+    display: block;
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+  }
+
+  p {
+    margin: 0;
+    opacity: 0.8;
+  }
+}
+
+/* Item Rows */
+.item-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; // Menjaga harga total tetap di tengah secara vertikal
+  padding: 15px 0;
+  border-bottom: 1px dashed var(--atheneum-divider);
+
+  .item-main-info {
+    display: flex;
+    flex-direction: column; // Menumpuk judul dan qty secara vertikal
+    gap: 4px;
+    flex: 1;
+
+    .title {
+      font-family: var(--app-font-display);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--atheneum-text);
+      text-transform: uppercase;
+    }
+
+    .qty-detail {
+      font-size: 0.875rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      opacity: 0.6; // Membuatnya lebih tipis agar tidak berebut perhatian dengan judul
+      color: var(--atheneum-primary);
+    }
+  }
+
+  .price {
+    font-weight: 800;
+    font-size: 1rem;
+    color: var(--atheneum-text);
+    margin-left: 15px;
+  }
+}
+
+/* Billing Summary */
+.billing-summary {
+  background: var(--atheneum-surface);
+  padding: 20px 0;
+  border-top: 1px solid var(--atheneum-primary);
+
+  .bill-line {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    font-size: 1rem;
+
+    span:first-child {
+      opacity: 0.6;
+    }
+
+    &.total {
+      margin-top: 15px;
+      padding-top: 15px;
+      border-top: 1px solid var(--atheneum-divider);
+      font-weight: 800;
+      font-size: 1.1rem;
+
+      span:first-child {
+        opacity: 1;
+        letter-spacing: 1px;
+      }
+
+      span:last-child {
+        color: var(--atheneum-primary);
+      }
+    }
+  }
+}
+
+/* Helper untuk Header Mobile */
+.editorial-toolbar {
+  --background: var(--atheneum-bg);
+  --color: var(--atheneum-primary);
+
+  ion-title {
+    font-weight: 800;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+}

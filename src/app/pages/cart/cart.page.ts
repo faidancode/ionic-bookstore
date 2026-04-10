@@ -6,11 +6,12 @@ import { AuthService } from 'src/app/core/services/auth.service';
 import { Router } from '@angular/router';
 import { addIcons } from 'ionicons';
 import { arrowBackOutline, bookmarkOutline } from 'ionicons/icons';
+import { AppHeaderComponent } from 'src/app/components/app-header/app-header.component';
 
 @Component({
   selector: 'app-cart',
   standalone: true,
-  imports: [CommonModule, IonicModule],
+  imports: [CommonModule, IonicModule, AppHeaderComponent],
   templateUrl: './cart.page.html',
   styleUrls: ['./cart.page.scss'],
 })

@@ -1,0 +1,26 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="editorial-toolbar">
+    @if (!hideBackButton()) {
+      <ion-buttons slot="start">
+        <ion-back-button
+          [defaultHref]="backHref()"
+          text=""
+          icon="arrow-back-outline"
+        ></ion-back-button>
+      </ion-buttons>
+    }
+
+    @if (title()) {
+      <ion-title>{{ title() }}</ion-title>
+    }
+
+    @if (showEndButton()) {
+      <ion-buttons slot="end">
+        <ion-button (click)="handleEndClick()">
+          <ion-icon [name]="endIcon()"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    }
+    <ng-content select="[extra-end]"></ng-content>
+  </ion-toolbar>
+</ion-header>

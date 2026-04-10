@@ -1,0 +1,66 @@
+.order-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.order-card {
+  background: var(--atheneum-bg);
+  border: 1px solid var(--atheneum-divider);
+  padding: 20px;
+  box-shadow: 6px 6px 0px var(--atheneum-divider);
+  transition: all 0.2s ease;
+
+  &:active {
+    transform: translate(3px, 3px);
+    box-shadow: 0px 0px 0px transparent;
+  }
+
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    .order-date {
+      font-size: 0.75rem;
+      opacity: 0.5;
+    }
+  }
+
+  .order-id {
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+    margin: 0;
+    opacity: 0.4;
+  }
+  .book-summary {
+    font-family: var(--app-font-display);
+    font-size: 1.1rem;
+    margin: 4px 0;
+  }
+  .more-items {
+    font-family: sans-serif;
+    font-size: 0.7rem;
+    font-style: italic;
+    opacity: 0.5;
+  }
+
+  .card-footer {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px dashed var(--atheneum-divider);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .label {
+      font-size: 0.6rem;
+      font-weight: 800;
+      opacity: 0.5;
+    }
+    .total-price {
+      font-weight: 800;
+      color: var(--atheneum-primary);
+    }
+  }
+}

@@ -1,0 +1,74 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="editorial-toolbar">
+    <ion-buttons slot="start"
+      ><ion-back-button defaultHref="/tabs/order" text=""></ion-back-button
+    ></ion-buttons>
+    <ion-title>Detail Pesanan</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="atheneum-content">
+  @if (order()) {
+  <div class="detail-container">
+    <div class="status-banner" [ngClass]="order()?.status?.toLowerCase()">
+      <div class="banner-left">
+        <span class="label">NOMOR PESANAN</span>
+        <h2 class="order-number">#{{ order()?.orderNumber }}</h2>
+      </div>
+
+      <div class="banner-right">
+        <span class="label">STATUS</span>
+        <div class="status-badge-wrapper">
+          <span class="status-text">{{ order()?.status }}</span>
+        </div>
+      </div>
+    </div>
+
+    <section class="info-section">
+      <h3 class="section-title">Alamat Pengiriman</h3>
+      <div class="address-box">
+        <strong
+          >{{ asSnapshot(order()?.addressSnapshot)?.recipientName }}</strong
+        >
+        <p>{{ asSnapshot(order()?.addressSnapshot)?.street }}</p>
+        <p>
+          {{ asSnapshot(order()?.addressSnapshot)?.city }}, {{
+          asSnapshot(order()?.addressSnapshot)?.postalCode }}
+        </p>
+      </div>
+    </section>
+
+    <section class="info-section">
+      <h3 class="section-title">Item Pesanan</h3>
+      @for (item of order()?.items; track item.id) {
+      <div class="item-row">
+        <div class="item-main-info">
+          <span class="title">{{ item.titleSnapshot }}</span>
+          <span class="qty-detail">
+            {{ item.quantity }}x {{ formatPrice(item.unitPriceCents) }}
+          </span>
+        </div>
+        <span class="price">{{ formatPrice(item.totalCents) }}</span>
+      </div>
+      }
+    </section>
+
+    <div class="billing-summary">
+      <div class="bill-line">
+        <span>Subtotal</span><span>{{ formatPrice(order()?.totalCents) }}</span>
+      </div>
+      <div class="bill-line">
+        <span>Ongkos Kirim</span
+        ><span>{{ formatPrice(order()?.shippingCents) }}</span>
+      </div>
+      <div class="bill-line total">
+        <span>Total Akhir</span
+        ><span
+          >{{ formatPrice((order()?.totalCents || 0) + (order()?.shippingCents
+          || 0)) }}</span
+        >
+      </div>
+    </div>
+  </div>
+  }
+</ion-content>

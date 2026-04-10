@@ -59,7 +59,20 @@ export const routes: Routes = [
   },
   {
     path: 'cart',
-    loadComponent: () => import('./pages/cart/cart.page').then(m => m.CartPage)
+    loadComponent: () =>
+      import('./pages/cart/cart.page').then((m) => m.CartPage),
+  },
+  {
+    path: 'tabs/account/order',
+    loadComponent: () =>
+      import('./pages/order/order.page').then((m) => m.OrderPage),
+  },
+  {
+    path: 'tabs/order/:id',
+    loadComponent: () =>
+      import('./pages/order-detail/order-detail.page').then(
+        (m) => m.OrderDetailPage,
+      ),
   },
   {
     path: '',
@@ -71,5 +84,4 @@ export const routes: Routes = [
     path: '**',
     redirectTo: 'tabs/home',
   },
-
 ];
