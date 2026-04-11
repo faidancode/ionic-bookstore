@@ -48,7 +48,7 @@ export class AuthService {
     }
 
     return this.http
-      .post<any>(`${environment.BASE_URL}/auth/refresh-token`, {
+      .post<any>(`${environment.BASE_URL}/auth/refresh`, {
         refreshToken: user.refreshToken,
       })
       .pipe(

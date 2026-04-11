@@ -9,12 +9,14 @@
 
 .section-header {
   margin-bottom: 2rem;
+
   .accent-line {
     width: 30px;
     height: 2px;
     background: var(--atheneum-primary);
     margin-bottom: 16px;
   }
+
   .display-title {
     font-family: var(--app-font-display);
     font-weight: 700;
@@ -22,6 +24,7 @@
     line-height: 0.85;
     letter-spacing: -3px;
     color: var(--atheneum-primary);
+
     span {
       color: transparent;
       -webkit-text-stroke: 1px var(--atheneum-primary);
@@ -68,17 +71,27 @@
   &.pending {
     color: #d4a373;
   }
+
   &.processing {
     color: #3a5a40;
   }
+
   &.shipped {
     color: #2196f3;
   }
+
   &.completed {
     color: #6b4f4f;
     background: rgba(107, 79, 79, 0.05);
   }
+
   &.cancelled {
     color: #e63946;
   }
+}
+
+.atheneum-full-modal {
+  --height: 100%;
+  --width: 100%;
+  --border-radius: 0;
 }

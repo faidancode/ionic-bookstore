@@ -31,7 +31,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
         err instanceof HttpErrorResponse &&
         err.status === 401 &&
         !req.url.includes('/auth/login') &&
-        !req.url.includes('/auth/refresh-token') // Jangan refresh jika yang error adalah endpoint refresh itu sendiri
+        !req.url.includes('/auth/refresh') // Jangan refresh jika yang error adalah endpoint refresh itu sendiri
       ) {
         return handle401Error(auth, req, next);
       }

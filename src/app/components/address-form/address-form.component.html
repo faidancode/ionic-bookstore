@@ -1,0 +1,93 @@
+<form [formGroup]="addressForm" (ngSubmit)="onSubmit()" class="atheneum-form">
+  <ion-list lines="none">
+    <div class="form-grid">
+
+      <div class="full-width input-group" [class.has-error]="isInvalid('label')">
+        <label>Label Alamat (e.g. Rumah, Kantor)</label>
+        <input type="text" formControlName="label" placeholder="Contoh: Rumah" />
+        <div class="error-container">
+          @if (isInvalid('label')) { <span class="error-message">{{ getErrorMessage('label') }}</span> }
+        </div>
+      </div>
+
+      <div class="input-group" [class.has-error]="isInvalid('recipientName')">
+        <label>Nama Penerima</label>
+        <input type="text" formControlName="recipientName" />
+        <div class="error-container">
+          @if (isInvalid('recipientName')) { <span class="error-message">{{ getErrorMessage('recipientName') }}</span> }
+        </div>
+      </div>
+
+      <div class="input-group" [class.has-error]="isInvalid('recipientPhone')">
+        <label>Nomor Telepon</label>
+        <input type="tel" formControlName="recipientPhone" placeholder="0812..." />
+        <div class="error-container">
+          @if (isInvalid('recipientPhone')) { <span class="error-message">{{ getErrorMessage('recipientPhone') }}</span>
+          }
+        </div>
+      </div>
+
+      <div class="full-width input-group" [class.has-error]="isInvalid('street')">
+        <label>Alamat Lengkap (Jalan, No Rumah)</label>
+        <textarea formControlName="street" rows="3"></textarea>
+        <div class="error-container">
+          @if (isInvalid('street')) { <span class="error-message">{{ getErrorMessage('street') }}</span> }
+        </div>
+      </div>
+
+      <div class="input-group" [class.has-error]="isInvalid('province')">
+        <label>Provinsi</label>
+        <input type="text" formControlName="province" />
+        <div class="error-container">
+          @if (isInvalid('province')) { <span class="error-message">{{ getErrorMessage('province') }}</span> }
+        </div>
+      </div>
+
+      <div class="input-group" [class.has-error]="isInvalid('city')">
+        <label>Kota/Kabupaten</label>
+        <input type="text" formControlName="city" />
+        <div class="error-container">
+          @if (isInvalid('city')) { <span class="error-message">{{ getErrorMessage('city') }}</span> }
+        </div>
+      </div>
+
+      <div class="input-group" [class.has-error]="isInvalid('district')">
+        <label>Kecamatan</label>
+        <input type="text" formControlName="district" />
+        <div class="error-container">
+          @if (isInvalid('district')) { <span class="error-message">{{ getErrorMessage('district') }}</span> }
+        </div>
+      </div>
+
+      <div class="input-group" [class.has-error]="isInvalid('subdistrict')">
+        <label>Kelurahan/Desa</label>
+        <input type="text" formControlName="subdistrict" />
+        <div class="error-container">
+          @if (isInvalid('subdistrict')) { <span class="error-message">{{ getErrorMessage('subdistrict') }}</span> }
+        </div>
+      </div>
+
+      <div class="input-group" [class.has-error]="isInvalid('postalCode')">
+        <label>Kode Pos</label>
+        <input type="text" formControlName="postalCode" />
+        <div class="error-container">
+          @if (isInvalid('postalCode')) { <span class="error-message">{{ getErrorMessage('postalCode') }}</span> }
+        </div>
+      </div>
+
+      <div class="full-width primary-checkbox">
+        <ion-checkbox formControlName="isPrimary" mode="md" labelPlacement="end">
+          Jadikan Alamat Utama
+        </ion-checkbox>
+      </div>
+    </div>
+  </ion-list>
+
+  <div class="form-actions">
+    <button type="button" class="btn-text" (click)="cancel.emit()">BATAL</button>
+    <button type="submit" class="btn-primary"
+      [disabled]="addressForm.invalid && (addressForm.dirty || addressForm.touched)">
+      SIMPAN ALAMAT
+    </button>
+  </div>
+</form>

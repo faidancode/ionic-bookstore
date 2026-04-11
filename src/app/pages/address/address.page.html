@@ -1,0 +1,21 @@
+<ion-content class="atheneum-content">
+  <div class="container">
+    <header class="page-header">
+      <h1 class="display-title">Buku<br /><span>Alamat</span></h1>
+      <button class="btn-add" (click)="openAddressModal()">TAMBAH BARU</button>
+    </header>
+
+    <div class="address-grid">
+      @for (addr of addresses(); track addr.id) {
+      <app-address-card [address]="addr">
+        <ion-button fill="clear" (click)="onEdit(addr);">
+          <ion-icon name="create-outline" slot="icon-only"></ion-icon>
+        </ion-button>
+        <ion-button fill="clear" color="danger" (click)="onDelete(addr.id)">
+          <ion-icon name="trash-outline" slot="icon-only"></ion-icon>
+        </ion-button>
+      </app-address-card>
+      }
+    </div>
+  </div>
+</ion-content>

@@ -1,0 +1,47 @@
+.address-card {
+  background: var(--atheneum-bg);
+  border: 1px solid var(--atheneum-divider);
+  padding: 20px;
+  box-shadow: 6px 6px 0px var(--atheneum-divider);
+  transition: all 0.2s ease;
+
+  &:active {
+    transform: translate(3px, 3px);
+    box-shadow: 0px 0px 0px transparent;
+  }
+
+  &.selected {
+    border-color: var(--atheneum-primary);
+    box-shadow: 4px 4px 0px var(--atheneum-primary);
+  }
+
+  .label-tag {
+    font-size: 0.6rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    background: var(--atheneum-primary);
+    color: var(--atheneum-bg);
+    padding: 2px 6px;
+    margin-right: 8px;
+    letter-spacing: 1px;
+  }
+
+  .recipient {
+    font-weight: 700;
+    font-size: 0.95rem;
+  }
+  .body {
+    margin-top: 10px;
+    p {
+      margin: 2px 0;
+      font-size: 0.85rem;
+      opacity: 0.7;
+      line-height: 1.4;
+    }
+    .phone {
+      font-weight: 600;
+      opacity: 1;
+      margin-bottom: 4px;
+    }
+  }
+}

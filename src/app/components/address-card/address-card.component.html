@@ -1,0 +1,18 @@
+<div class="address-card" [class.selected]="isSelected()">
+  <div class="card-content">
+    <div class="header">
+      <span class="label-tag">{{ address().label }}</span>
+      <span class="recipient">{{ address().recipientName }}</span>
+    </div>
+
+    <div class="body">
+      <p class="phone">{{ address().recipientPhone }}</p>
+      <p class="street">{{ address().street }}</p>
+      <p class="area">{{ formattedArea() }}</p>
+    </div>
+  </div>
+
+  <div class="card-actions">
+    <ng-content></ng-content>
+  </div>
+</div>

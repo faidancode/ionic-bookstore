@@ -1,0 +1,80 @@
+.container {
+  padding: 40px 20px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 40px;
+
+  .display-title {
+    font-family: var(--app-font-display);
+    font-size: 3rem;
+    font-weight: 800;
+    line-height: 0.9;
+    color: var(--atheneum-primary);
+    margin: 0;
+    span {
+      -webkit-text-stroke: 1px var(--atheneum-primary);
+      color: transparent;
+    }
+  }
+
+  .btn-add {
+    background: var(--atheneum-primary);
+    color: white;
+    padding: 12px 20px;
+    font-weight: 800;
+    font-size: 0.7rem;
+    letter-spacing: 1.5px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.2);
+
+    &:active {
+      transform: translate(2px, 2px);
+      box-shadow: none;
+    }
+  }
+}
+
+.address-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Container untuk Form saat muncul (Inline mode) */
+.form-overlay {
+  margin-top: 20px;
+  padding: 24px;
+  background: var(--atheneum-surface);
+  border: 1.5px solid var(--atheneum-primary);
+  box-shadow: 10px 10px 0px var(--atheneum-primary);
+
+  .form-title {
+    font-family: var(--app-font-display);
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+  }
+}
+
+.empty-state {
+  text-align: center;
+  padding: 60px 0;
+  opacity: 0.5;
+  ion-icon {
+    font-size: 3rem;
+  }
+  p {
+    font-style: italic;
+  }
+}

@@ -1,0 +1,56 @@
+.atheneum-form {
+  padding: 10px;
+
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+
+    .full-width {
+      grid-column: span 2;
+    }
+  }
+
+  label {
+    display: block;
+    font-size: 0.65rem;
+    font-weight: 800;
+    margin-bottom: 6px;
+    letter-spacing: 1px;
+    opacity: 0.6;
+  }
+
+  input,
+  textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1.5px solid var(--atheneum-divider);
+    background: var(--atheneum-bg);
+    font-family: inherit;
+    &:focus {
+      border-color: var(--atheneum-primary);
+      outline: none;
+    }
+  }
+
+  .form-actions {
+    margin-top: 30px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+
+    .btn-text {
+      background: transparent;
+      border: none;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .btn-primary {
+      background: var(--atheneum-primary);
+      color: white;
+      padding: 12px 24px;
+      border: none;
+      font-weight: 800;
+    }
+  }
+}

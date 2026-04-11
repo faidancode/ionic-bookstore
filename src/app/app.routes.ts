@@ -75,6 +75,11 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'tabs/account/address',
+    loadComponent: () =>
+      import('./pages/address/address.page').then((m) => m.AddressPage),
+  },
+  {
     path: '',
     redirectTo: 'tabs/home',
     pathMatch: 'full',
