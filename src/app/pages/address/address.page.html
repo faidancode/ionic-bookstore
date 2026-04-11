@@ -1,6 +1,14 @@
-<ion-content class="atheneum-content">
+<app-header
+  title="Daftar Alamat"
+  backHref="/tabs/account"
+  [showEndButton]="true"
+  endIcon="add"
+  (onEndButtonClick)="openAddressModal()"
+>
+</app-header>
+<ion-content [fullscreen]="true" class="atheneum-content">
   <div class="container">
-    <header class="page-header">
+    <header class="page-header ion-hide-md-down">
       <h1 class="display-title">Buku<br /><span>Alamat</span></h1>
       <button class="btn-add" (click)="openAddressModal()">TAMBAH BARU</button>
     </header>

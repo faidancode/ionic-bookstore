@@ -9,6 +9,7 @@ import { AddressFormComponent } from 'src/app/components/address-form/address-fo
 import { addIcons } from 'ionicons';
 import { createOutline, trashOutline } from 'ionicons/icons';
 import { ToastService } from 'src/app/core/services/toast.service';
+import { AppHeaderComponent } from 'src/app/components/app-header/app-header.component';
 
 @Component({
   selector: 'app-address',
@@ -16,6 +17,7 @@ import { ToastService } from 'src/app/core/services/toast.service';
   imports: [
     CommonModule,
     IonicModule,
+    AppHeaderComponent,
     AddressCardComponent,
     AddressFormComponent,
   ],

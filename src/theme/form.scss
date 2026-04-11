@@ -1,142 +1,174 @@
 .atheneum-form {
-    .input-group {
-        display: flex;
-        flex-direction: column;
+  .input-group {
+    display: flex;
+    flex-direction: column;
 
-        label {
-            font-size: 0.65rem;
-            font-weight: 800;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            margin-bottom: 6px;
-            color: var(--atheneum-primary);
-            opacity: 0.8;
-            transition: color 0.3s ease;
-        }
-
-        input,
-        textarea {
-            width: 100%;
-            padding: 12px;
-            border: 1.5px solid var(--atheneum-divider);
-            background: var(--atheneum-bg);
-            font-family: inherit;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
-
-            &:focus {
-                border-color: var(--atheneum-primary);
-                outline: none;
-                box-shadow: 4px 4px 0px rgba(var(--atheneum-primary-rgb), 0.1);
-            }
-        }
-
-        /* State Error */
-        &.has-error {
-            label {
-                color: #E63946;
-                opacity: 1;
-            }
-
-            input,
-            textarea {
-                border-color: #E63946;
-                background: rgba(230, 57, 70, 0.02);
-            }
-        }
+    label {
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+      color: var(--atheneum-primary);
+      opacity: 0.8;
+      transition: color 0.3s ease;
     }
 
-    .error-container {
-        min-height: 18px; // Mencegah layout "melompat" saat error muncul
-        margin-top: 4px;
+    input,
+    textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1.5px solid var(--atheneum-divider);
+      background: var(--atheneum-bg);
+      font-family: inherit;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+
+      &:focus {
+        border-color: var(--atheneum-primary);
+        outline: none;
+        box-shadow: 4px 4px 0px rgba(var(--atheneum-primary-rgb), 0.1);
+      }
     }
 
-    .error-message {
-        color: #E63946;
-        font-size: 0.65rem;
-        font-weight: 700;
-        font-style: italic;
-        display: flex;
-        align-items: center;
-        animation: slideIn 0.2s ease-out;
+    /* State Error */
+    &.has-error {
+      label {
+        color: #e63946;
+        opacity: 1;
+      }
 
-        &::before {
-            content: '●';
-            margin-right: 4px;
-            font-size: 8px;
-        }
+      input,
+      textarea {
+        border-color: #e63946;
+        background: rgba(230, 57, 70, 0.02);
+      }
     }
+  }
 
-    .primary-checkbox {
-        margin-top: 10px;
-        padding: 10px 0;
+  .error-container {
+    min-height: 18px; // Mencegah layout "melompat" saat error muncul
+    margin-top: 4px;
+  }
 
-        ion-checkbox {
-            --size: 18px;
-            --checkbox-background-checked: var(--atheneum-primary);
-            --border-color: var(--atheneum-primary);
-            font-size: 0.85rem;
-            font-weight: 600;
-        }
+  .error-message {
+    color: #e63946;
+    font-size: 0.65rem;
+    font-weight: 700;
+    font-style: italic;
+    display: flex;
+    align-items: center;
+    animation: slideIn 0.2s ease-out;
+
+    &::before {
+      content: "●";
+      margin-right: 4px;
+      font-size: 8px;
     }
+  }
 
-    .form-actions {
-        margin-top: 40px;
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-        gap: 20px;
-        padding-top: 20px;
-        border-top: 1px solid var(--atheneum-divider);
+  .primary-checkbox {
+    margin-top: 10px;
+    padding: 10px 0;
 
-        .btn-text {
-            background: transparent;
-            border: none;
-            font-weight: 800;
-            font-size: 0.7rem;
-            letter-spacing: 1px;
-            color: var(--atheneum-text);
-            opacity: 0.6;
-
-            &:hover {
-                opacity: 1;
-            }
-        }
-
-        .btn-primary {
-            background: var(--atheneum-primary);
-            color: white;
-            border: none;
-            padding: 14px 28px;
-            font-weight: 800;
-            font-size: 0.75rem;
-            letter-spacing: 2px;
-            box-shadow: 6px 6px 0px var(--atheneum-divider);
-            transition: all 0.2s ease;
-
-            &:disabled {
-                opacity: 0.3;
-                filter: grayscale(1);
-                box-shadow: none;
-                transform: none;
-            }
-
-            &:active:not(:disabled) {
-                transform: translate(3px, 3px);
-                box-shadow: 0px 0px 0px transparent;
-            }
-        }
+    ion-checkbox {
+      --size: 18px;
+      --checkbox-background-checked: var(--atheneum-primary);
+      --border-color: var(--atheneum-primary);
+      font-size: 0.85rem;
+      font-weight: 600;
     }
+  }
+
+  .form-actions {
+    margin-top: 40px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 20px;
+    padding-top: 20px;
+    border-top: 1px solid var(--atheneum-divider);
+
+    .btn-text {
+      background: transparent;
+      border: none;
+      font-weight: 800;
+      font-size: 0.7rem;
+      letter-spacing: 1px;
+      color: var(--atheneum-text);
+      opacity: 0.6;
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
+}
+
+.btn-primary {
+  background: var(--atheneum-primary);
+  color: white;
+  border: none;
+  padding: 14px 28px;
+  font-weight: 800;
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  box-shadow: 6px 6px 0px var(--atheneum-divider);
+  transition: all 0.2s ease;
+
+  &:disabled {
+    opacity: 0.3;
+    filter: grayscale(1);
+    box-shadow: none;
+    transform: none;
+  }
+
+  &:active:not(:disabled) {
+    transform: translate(3px, 3px);
+    box-shadow: 0px 0px 0px transparent;
+  }
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--atheneum-primary);
+  border: 2px solid var(--atheneum-primary);
+  padding: 12px 26px; // Dikurangi 2px karena ada border agar ukuran total tetap sama
+  font-weight: 800;
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  box-shadow: 6px 6px 0px var(--atheneum-divider);
+  transition: all 0.2s ease;
+  cursor: pointer;
+
+  &:disabled {
+    opacity: 0.3;
+    filter: grayscale(1);
+    box-shadow: none;
+    transform: none;
+    cursor: not-allowed;
+  }
+
+  &:active:not(:disabled) {
+    transform: translate(3px, 3px);
+    box-shadow: 0px 0px 0px transparent;
+  }
+
+  // Efek tambahan agar lebih interaktif saat hover (opsional)
+  &:hover:not(:disabled) {
+    background: var(--atheneum-primary);
+    color: white;
+  }
 }
 
 @keyframes slideIn {
-    from {
-        opacity: 0;
-        transform: translateY(-5px);
-    }
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
 
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

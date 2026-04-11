@@ -10,7 +10,7 @@ import {
   IonIcon,
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { arrowBackOutline, bagHandleOutline } from 'ionicons/icons';
+import { add, arrowBackOutline, bagHandleOutline } from 'ionicons/icons';
 
 @Component({
   standalone: true,
@@ -41,6 +41,7 @@ export class AppHeaderComponent {
   constructor() {
     addIcons({
       arrowBackOutline,
+      add,
     });
   }
 
