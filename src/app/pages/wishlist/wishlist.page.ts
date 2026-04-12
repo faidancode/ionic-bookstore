@@ -8,6 +8,7 @@ import { BookCardComponent } from 'src/app/components/book-card/book-card.compon
 import { addIcons } from 'ionicons';
 import { arrowBackOutline, bagHandleOutline } from 'ionicons/icons';
 import { AppHeaderComponent } from 'src/app/components/app-header/app-header.component';
+import { SectionHeaderComponent } from 'src/app/components/section-header/section-header.component';
 
 @Component({
   selector: 'app-wishlist',
@@ -20,6 +21,7 @@ import { AppHeaderComponent } from 'src/app/components/app-header/app-header.com
     RouterLink,
     BookCardComponent,
     AppHeaderComponent,
+    SectionHeaderComponent,
   ],
 })
 export class WishlistPage implements OnInit {
@@ -43,7 +45,7 @@ export class WishlistPage implements OnInit {
     return data?.items || [];
   });
 
-  ngOnInit() {};
+  ngOnInit() {}
   ionViewDidEnter() {
     this.loadWishlist();
   }

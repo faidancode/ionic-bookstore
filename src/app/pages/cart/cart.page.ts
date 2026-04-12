@@ -7,11 +7,18 @@ import { Router, RouterLink } from '@angular/router';
 import { addIcons } from 'ionicons';
 import { arrowBackOutline, bookmarkOutline } from 'ionicons/icons';
 import { AppHeaderComponent } from 'src/app/components/app-header/app-header.component';
+import { SectionHeaderComponent } from 'src/app/components/section-header/section-header.component';
 
 @Component({
   selector: 'app-cart',
   standalone: true,
-  imports: [CommonModule, IonicModule, AppHeaderComponent, RouterLink],
+  imports: [
+    CommonModule,
+    IonicModule,
+    AppHeaderComponent,
+    SectionHeaderComponent,
+    RouterLink,
+  ],
   templateUrl: './cart.page.html',
   styleUrls: ['./cart.page.scss'],
 })

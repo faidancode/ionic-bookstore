@@ -1,0 +1,11 @@
+<header class="section-header ion-hide-md-down">
+  <h1 class="display-title">
+    {{ title() }}<br />
+    @if (subtitleAksan()) {
+      <span>{{ subtitleAksan() }}</span>
+    }
+  </h1>
+  @if (description()) {
+    <p class="subtitle">{{ description() }}</p>
+  }
+</header>

@@ -1,10 +1,12 @@
 <app-header title="Koleksi Tersimpan"></app-header>
 <ion-content [fullscreen]="true" class="atheneum-content">
   <div class="wishlist-container">
-    <header class="page-header">
-      <h1 class="display-title">Koleksi<br /><span>Tersimpan</span></h1>
-      <p class="subtitle">Buku-buku yang menunggu untuk dibawa pulang.</p>
-    </header>
+    <app-section-header
+      title="Koleksi"
+      subtitleAksan="Tersimpan"
+      description="Buku-buku yang menunggu untuk dibawa pulang."
+    >
+    </app-section-header>
 
     @if (loading() && !wishlistItems().length) {
     <div class="loading-center">
@@ -25,7 +27,9 @@
     }
 
     <ion-infinite-scroll [disabled]="true" (ionInfinite)="loadMore($event)">
-      <ion-infinite-scroll-content loadingSpinner="lines-sharp"></ion-infinite-scroll-content>
+      <ion-infinite-scroll-content
+        loadingSpinner="lines-sharp"
+      ></ion-infinite-scroll-content>
     </ion-infinite-scroll>
   </div>
 </ion-content>

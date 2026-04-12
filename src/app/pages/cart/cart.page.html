@@ -8,10 +8,12 @@
 </app-header>
 <ion-content [fullscreen]="true" class="atheneum-content">
   <div class="cart-wrapper">
-    <header class="cart-header">
-      <h1 class="display-title">Tas<br /><span>Belanja</span></h1>
-      <p class="item-count">{{ cart()?.items?.length || 0 }} ITEM TERPILIH</p>
-    </header>
+    <app-section-header
+      title="Koleksi"
+      subtitleAksan="Tersimpan"
+      [description]="(cart()?.items?.length || 0) + ' ITEM TERPILIH'"
+    >
+    </app-section-header>
 
     @if (cart()?.items?.length) {
     <div class="mobile-layout ion-hide-md-up">

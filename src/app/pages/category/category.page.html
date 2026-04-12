@@ -1,21 +1,31 @@
 <app-header title="Kategori"></app-header>
 
 <ion-content [fullscreen]="true" class="atheneum-content">
-  <header class="page-header">
-    <h1 class="display-title">Indeks<br /><span>Kategori</span></h1>
-    <p class="subtitle">Arsip literatur berdasarkan genre dan topik.</p>
-  </header>
+  <app-section-header
+    title="Indeks"
+    subtitleAksan="Kategori"
+    description="Arsip literatur berdasarkan genre dan topik."
+  >
+  </app-section-header>
 
-  <div class="search-container">
+  <!-- <div class="search-container">
     <div class="search-box">
       <ion-icon name="search-outline"></ion-icon>
-      <input type="text" placeholder="Cari genre..." (input)="onSearch($event)" />
+      <input
+        type="text"
+        placeholder="Cari genre..."
+        (input)="onSearch($event)"
+      />
     </div>
-  </div>
+  </div> -->
 
   <div class="category-list-vertical">
     @for (category of categories(); track category.id; let i = $index) {
-    <div class="category-row" [style.animation-delay]="i * 50 + 'ms'" (click)="navigateToCategory(category)">
+    <div
+      class="category-row"
+      [style.animation-delay]="i * 50 + 'ms'"
+      (click)="navigateToCategory(category)"
+    >
       <div class="row-content">
         <span class="index">/0{{ i + 1 }}</span>
         <div class="info">
@@ -32,8 +42,14 @@
     }
   </div>
 
-  <ion-infinite-scroll (ionInfinite)="loadMore($event)" [disabled]="!categoryService.hasMore()">
-    <ion-infinite-scroll-content loadingSpinner="crescent" loadingText="Memuat data lebih banyak...">
+  <ion-infinite-scroll
+    (ionInfinite)="loadMore($event)"
+    [disabled]="!categoryService.hasMore()"
+  >
+    <ion-infinite-scroll-content
+      loadingSpinner="crescent"
+      loadingText="Memuat data lebih banyak..."
+    >
     </ion-infinite-scroll-content>
   </ion-infinite-scroll>
 </ion-content>

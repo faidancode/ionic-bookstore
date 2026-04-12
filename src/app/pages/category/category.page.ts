@@ -7,8 +7,13 @@ import {
   IonInfiniteScrollContent,
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { chevronBackOutline } from 'ionicons/icons';
+import {
+  chevronBackOutline,
+  searchOutline,
+  chevronForwardOutline,
+} from 'ionicons/icons';
 import { AppHeaderComponent } from 'src/app/components/app-header/app-header.component';
+import { SectionHeaderComponent } from 'src/app/components/section-header/section-header.component';
 import { CategoryService } from 'src/app/core/services/category.service';
 
 @Component({
@@ -23,6 +28,7 @@ import { CategoryService } from 'src/app/core/services/category.service';
     IonInfiniteScroll,
     IonInfiniteScrollContent,
     AppHeaderComponent,
+    SectionHeaderComponent,
   ],
 })
 export class CategoryPage implements OnInit {
@@ -31,9 +37,7 @@ export class CategoryPage implements OnInit {
   loading = this.categoryService.loading; // Signal dari service
 
   constructor(public categoryService: CategoryService) {
-    addIcons({
-      chevronBackOutline,
-    });
+    addIcons({ searchOutline, chevronForwardOutline, chevronBackOutline });
   }
 
   ngOnInit() {

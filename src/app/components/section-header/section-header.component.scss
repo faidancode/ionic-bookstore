@@ -1,0 +1,38 @@
+.section-header {
+  margin-bottom: 40px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--atheneum-divider);
+
+  .display-title {
+    font-family: var(--app-font-display);
+    font-size: 3.5rem;
+    font-weight: 800;
+    line-height: 0.85;
+    color: var(--atheneum-primary);
+    margin: 0;
+    text-transform: uppercase;
+
+    span {
+      -webkit-text-stroke: 1px var(--atheneum-primary);
+      color: transparent;
+      letter-spacing: 2px;
+    }
+  }
+
+  .subtitle {
+    margin-top: 15px;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--atheneum-text);
+    opacity: 0.6;
+    max-width: 400px;
+    line-height: 1.4;
+  }
+}
+
+// Tambahan proteksi jika ion-hide-md-down tidak cukup
+@media (max-width: 768px) {
+  .section-header {
+    display: none !important;
+  }
+}
