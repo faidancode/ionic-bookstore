@@ -1,26 +1,27 @@
 <ion-header class="ion-no-border">
   <ion-toolbar class="editorial-toolbar">
     @if (!hideBackButton()) {
-      <ion-buttons slot="start">
-        <ion-back-button
-          [defaultHref]="backHref()"
-          text=""
-          icon="arrow-back-outline"
-        ></ion-back-button>
-      </ion-buttons>
+    <ion-buttons slot="start">
+      <ion-back-button [defaultHref]="backHref()" text="" icon="arrow-back-outline"></ion-back-button>
+    </ion-buttons>
     }
 
-    @if (title()) {
-      <ion-title>{{ title() }}</ion-title>
-    }
+    @if (title()) { <ion-title>{{ title() }}</ion-title> }
 
-    @if (showEndButton()) {
-      <ion-buttons slot="end">
-        <ion-button (click)="handleEndClick()">
-          <ion-icon [name]="endIcon()"></ion-icon>
-        </ion-button>
-      </ion-buttons>
-    }
-    <ng-content select="[extra-end]"></ng-content>
+    <ion-buttons slot="end">
+      @if (showCart()) {
+      <ion-button (click)="goToCart()" class="cart-btn">
+        <ion-icon name="bag-handle-outline"></ion-icon>
+        <!-- @if (cartCount() > 0) { -->
+        <span class="cart-badge">{{ cartCount() }}</span>
+        <!-- } -->
+      </ion-button>
+      } @else if (showEndButton()) {
+      <ion-button (click)="handleEndClick()">
+        <ion-icon [name]="endIcon()"></ion-icon>
+      </ion-button>
+      }
+      <ng-content select="[extra-end]"></ng-content>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>

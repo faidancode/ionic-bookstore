@@ -11,8 +11,8 @@
   }
 
   &.selected {
-    border-color: var(--atheneum-primary);
-    box-shadow: 4px 4px 0px var(--atheneum-primary);
+    border: 2px solid var(--atheneum-primary);
+    box-shadow: 4px 4px 0px var(--atheneum-divider);
   }
 
   .label-tag {
@@ -30,14 +30,17 @@
     font-weight: 700;
     font-size: 0.95rem;
   }
+
   .body {
     margin-top: 10px;
+
     p {
       margin: 2px 0;
       font-size: 0.85rem;
       opacity: 0.7;
       line-height: 1.4;
     }
+
     .phone {
       font-weight: 600;
       opacity: 1;

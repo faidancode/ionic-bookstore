@@ -1,4 +1,5 @@
-import { Component, input, output } from '@angular/core';
+import { Component, computed, inject, input, output } from '@angular/core';
+import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import {
   IonHeader,
@@ -11,6 +12,7 @@ import {
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { add, arrowBackOutline, bagHandleOutline } from 'ionicons/icons';
+import { CartService } from 'src/app/core/services/cart.service';
 
 @Component({
   standalone: true,
@@ -29,24 +31,43 @@ import { add, arrowBackOutline, bagHandleOutline } from 'ionicons/icons';
 })
 export class AppHeaderComponent {
   // Input menggunakan Signal (Required atau Optional dengan default)
+  private cartService = inject(CartService);
+  private router = inject(Router);
+
   title = input<string>('');
   hideBackButton = input<boolean>(false);
   showEndButton = input<boolean>(true);
   backHref = input<string>('/tabs/home');
-  endIcon = input<string>('bookmark-outline');
+  endIcon = input<string>('');
 
-  // Output menggunakan Signal-based output
+  showCart = input<boolean>(true);
+  // cartCount = computed(() => this.cartService.getCartCount());
+
   onEndButtonClick = output<void>();
 
   constructor() {
     addIcons({
       arrowBackOutline,
       add,
+      bagHandleOutline
     });
   }
 
+  cartCount = computed(() => {
+    const count = this.cartService.count(); // Pastikan ini hanya return nilai
+    return count;
+  });
+
+  ngOnInit() {
+    // Membaca signal di ngOnInit untuk log diperbolehkan
+    console.log('Current Cart Count:', this.cartCount());
+  }
+
   handleEndClick() {
-    // Memancarkan event ke komponen parent
     this.onEndButtonClick.emit();
+  }
+
+  goToCart() {
+    this.router.navigate(['/cart']);
   }
 }

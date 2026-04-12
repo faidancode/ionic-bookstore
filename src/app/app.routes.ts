@@ -80,6 +80,10 @@ export const routes: Routes = [
       import('./pages/address/address.page').then((m) => m.AddressPage),
   },
   {
+    path: 'checkout',
+    loadComponent: () => import('./pages/checkout/checkout.page').then(m => m.CheckoutPage)
+  },
+  {
     path: '',
     redirectTo: 'tabs/home',
     pathMatch: 'full',
@@ -89,4 +93,5 @@ export const routes: Routes = [
     path: '**',
     redirectTo: 'tabs/home',
   },
+
 ];

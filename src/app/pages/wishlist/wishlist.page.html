@@ -1,19 +1,4 @@
-<ion-header class="ion-no-border">
-  <ion-toolbar class="editorial-toolbar">
-    <ion-buttons slot="start">
-      <ion-back-button
-        defaultHref="/tabs/home"
-        text=""
-        icon="arrow-back-outline"
-      ></ion-back-button>
-    </ion-buttons>
-    <ion-buttons slot="end">
-      <ion-button (click)="toCart()" class="cart-btn">
-        <ion-icon name="bag-handle-outline"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
+<app-header title="Koleksi Tersimpan"></app-header>
 <ion-content [fullscreen]="true" class="atheneum-content">
   <div class="wishlist-container">
     <header class="page-header">
@@ -40,9 +25,7 @@
     }
 
     <ion-infinite-scroll [disabled]="true" (ionInfinite)="loadMore($event)">
-      <ion-infinite-scroll-content
-        loadingSpinner="lines-sharp"
-      ></ion-infinite-scroll-content>
+      <ion-infinite-scroll-content loadingSpinner="lines-sharp"></ion-infinite-scroll-content>
     </ion-infinite-scroll>
   </div>
 </ion-content>

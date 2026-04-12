@@ -1,12 +1,36 @@
-<app-header title="Keranjang Belanja" backHref="/tabs/home" [showEndButton]="true" endIcon="bookmark-outline"
-  (onEndButtonClick)="toWishlist()">
+<app-header
+  title="Checkout"
+  backHref="/tabs/cart"
+>
 </app-header>
+
 <ion-content [fullscreen]="true" class="atheneum-content">
-  <div class="cart-wrapper">
-    <header class="cart-header">
-      <h1 class="display-title">Tas<br /><span>Belanja</span></h1>
-      <p class="item-count">{{ cart()?.items?.length || 0 }} ITEM TERPILIH</p>
+  <div class="checkout-wrapper">
+    <header class="checkout-header">
+      <h1 class="display-title">Ringkasan<br /><span>Pesanan</span></h1>
     </header>
+
+    <h2 class="section-title">Alamat Pengiriman</h2>
+    
+    <div class="address-list">
+      @for (addr of topAddresses(); track addr.id) {
+      <div (click)="selectAddress(addr.id)">
+        <app-address-card [address]="addr" [isSelected]="addr.id === selectedAddressId">
+          <ion-icon 
+            name="checkmark-circle" 
+            [color]="addr.id === selectedAddressId ? 'primary' : 'medium'"
+            slot="icon-only"
+            [style.opacity]="addr.id === selectedAddressId ? 1 : 0.2"
+            style="font-size: 24px;">
+          </ion-icon>
+        </app-address-card>
+      </div>
+      }
+    </div>
+    
+    <button class="btn-add-address" (click)="openAddressModal()">+ TAMBAH ALAMAT BARU</button>
+
+    <h2 class="section-title">Daftar Barang</h2>
 
     <div class="mobile-layout ion-hide-md-up">
       @for (item of cart()?.items; track item.id) {
@@ -15,15 +39,7 @@
         <div class="item-info">
           <h3 class="title">{{ item.bookTitle }}</h3>
           <p class="price">{{ formatPrice(item.priceCentsAtAdd) }}</p>
-          <div class="qty-control">
-            <button (click)="updateQty(item.bookId, item.quantity - 1)">
-              -
-            </button>
-            <span>{{ item.quantity }}</span>
-            <button (click)="updateQty(item.bookId, item.quantity + 1)">
-              +
-            </button>
-          </div>
+          <div class="qty">Qty: {{ item.quantity }}</div>
         </div>
       </div>
       }
@@ -50,17 +66,7 @@
               </div>
             </td>
             <td>{{ formatPrice(item.priceCentsAtAdd) }}</td>
-            <td>
-              <div class="qty-control">
-                <button (click)="updateQty(item.bookId, item.quantity - 1)">
-                  -
-                </button>
-                <span>{{ item.quantity }}</span>
-                <button (click)="updateQty(item.bookId, item.quantity + 1)">
-                  +
-                </button>
-              </div>
-            </td>
+            <td>{{ item.quantity }}</td>
             <td class="bold">
               {{ formatPrice(item.priceCentsAtAdd * item.quantity) }}
             </td>
@@ -75,7 +81,9 @@
         <span>TOTAL PEMBAYARAN</span>
         <h2 class="total-amount">{{ formatPrice(totalBayar()) }}</h2>
       </div>
-      <button class="btn-checkout" (click)="checkout()">LANJUT KE PEMBAYARAN</button>
+      <button class="btn-checkout" (click)="processCheckout()" [disabled]="!selectedAddressId || totalBayar() === 0">
+        BAYAR SEKARANG
+      </button>
     </div>
   </div>
 </ion-content>

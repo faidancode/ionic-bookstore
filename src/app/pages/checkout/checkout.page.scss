@@ -1,29 +1,55 @@
-.cart-wrapper {
+.checkout-wrapper {
   padding: 60px 24px;
   max-width: 1200px;
   margin: 0 auto;
 }
 
-.cart-header {
+.checkout-header {
   margin-bottom: 40px;
+
   .display-title {
     font-family: var(--app-font-display);
     font-size: 3rem;
     font-weight: 800;
     line-height: 0.9;
     color: var(--atheneum-primary);
+
     span {
       -webkit-text-stroke: 1px var(--atheneum-primary);
       color: transparent;
     }
   }
-  .item-count {
-    font-size: 0.7rem;
-    font-weight: 800;
-    letter-spacing: 2px;
-    margin-top: 10px;
-    opacity: 0.5;
-  }
+}
+
+.section-title {
+  font-family: var(--app-font-display);
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--atheneum-primary);
+  margin-top: 30px;
+  margin-bottom: 20px;
+  border-bottom: 2px solid var(--atheneum-primary);
+  padding-bottom: 10px;
+}
+
+/* Address List */
+.address-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.btn-add-address {
+  width: 100%;
+  padding: 15px;
+  background: transparent;
+  color: var(--atheneum-primary);
+  font-weight: 800;
+  border: 1.5px dashed var(--atheneum-primary);
+  letter-spacing: 2px;
+  cursor: pointer;
+  margin-bottom: 30px;
 }
 
 /* Mobile Item */
@@ -32,24 +58,33 @@
   gap: 16px;
   padding: 16px 0;
   border-bottom: 1px solid var(--atheneum-divider);
+
   .item-thumb {
     width: 70px;
     aspect-ratio: 2/3;
     object-fit: cover;
     border: 1px solid var(--atheneum-primary);
   }
+
   .item-info {
     flex: 1;
+
     .title {
       font-size: 1rem;
       font-weight: 800;
       margin: 0;
       color: var(--atheneum-text);
     }
+
     .price {
       font-size: 0.85rem;
       opacity: 0.6;
       margin: 4px 0 12px;
+    }
+
+    .qty {
+      font-size: 0.85rem;
+      font-weight: 600;
     }
   }
 }
@@ -58,6 +93,7 @@
 .atheneum-table {
   width: 100%;
   border-collapse: collapse;
+
   th {
     text-align: left;
     font-size: 0.7rem;
@@ -65,43 +101,30 @@
     padding: 15px;
     border-bottom: 2px solid var(--atheneum-primary);
   }
+
   td {
     padding: 20px 15px;
     border-bottom: 1px solid var(--atheneum-divider);
   }
+
   .product-cell {
     display: flex;
     align-items: center;
     gap: 15px;
+
     img {
       width: 50px;
     }
+
     .title {
       font-weight: 800;
       margin: 0;
     }
+
     .author {
       font-size: 0.7rem;
       opacity: 0.5;
     }
-  }
-}
-
-/* Shared Components */
-.qty-control {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  button {
-    background: transparent;
-    border: 1px solid var(--atheneum-primary);
-    width: 25px;
-    height: 25px;
-    cursor: pointer;
-  }
-  span {
-    font-weight: 800;
-    font-size: 0.9rem;
   }
 }
 
@@ -117,11 +140,13 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
+
     span {
       font-size: 0.7rem;
       font-weight: 800;
       letter-spacing: 1px;
     }
+
     .total-amount {
       font-family: var(--app-font-display);
       font-weight: 800;
@@ -137,5 +162,10 @@
     font-weight: 800;
     border: none;
     letter-spacing: 2px;
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
   }
 }

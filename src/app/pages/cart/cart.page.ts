@@ -49,7 +49,7 @@ export class CartPage implements OnInit {
     const user = this.authService.currentUser();
     if (!user?.id) return;
     this.cartService.getCartByUser(user.id).subscribe({
-      next: () => {},
+      next: () => { },
     });
   }
 
@@ -91,8 +91,7 @@ export class CartPage implements OnInit {
    */
   checkout() {
     if (this.totalBayar() === 0) return;
-    console.log('Melanjutkan ke pembayaran untuk total:', this.totalBayar());
-    // Navigasi ke halaman checkout atau tampilkan modal pengiriman
+    this.router.navigate(['/checkout']);
   }
 
   toWishlist() {

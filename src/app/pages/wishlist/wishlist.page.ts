@@ -7,13 +7,14 @@ import { AuthService } from 'src/app/core/services/auth.service';
 import { BookCardComponent } from 'src/app/components/book-card/book-card.component';
 import { addIcons } from 'ionicons';
 import { arrowBackOutline, bagHandleOutline } from 'ionicons/icons';
+import { AppHeaderComponent } from 'src/app/components/app-header/app-header.component';
 
 @Component({
   selector: 'app-wishlist',
   templateUrl: './wishlist.page.html',
   styleUrls: ['./wishlist.page.scss'],
   standalone: true,
-  imports: [CommonModule, IonicModule, RouterLink, BookCardComponent],
+  imports: [CommonModule, IonicModule, RouterLink, BookCardComponent, AppHeaderComponent],
 })
 export class WishlistPage implements OnInit {
   private router = inject(Router);

@@ -6,6 +6,9 @@ import {
   IonInfiniteScroll,
   IonInfiniteScrollContent,
 } from '@ionic/angular/standalone';
+import { addIcons } from 'ionicons';
+import { chevronBackOutline } from 'ionicons/icons';
+import { AppHeaderComponent } from 'src/app/components/app-header/app-header.component';
 import { CategoryService } from 'src/app/core/services/category.service';
 
 @Component({
@@ -19,6 +22,7 @@ import { CategoryService } from 'src/app/core/services/category.service';
     IonSpinner,
     IonInfiniteScroll,
     IonInfiniteScrollContent,
+    AppHeaderComponent,
   ],
 })
 export class CategoryPage implements OnInit {
@@ -26,7 +30,11 @@ export class CategoryPage implements OnInit {
   categories = this.categoryService.categories; // Signal dari service
   loading = this.categoryService.loading; // Signal dari service
 
-  constructor(public categoryService: CategoryService) {}
+  constructor(public categoryService: CategoryService) {
+    addIcons({
+      chevronBackOutline,
+    });
+  }
 
   ngOnInit() {
     this.categoryService.fetchAll().subscribe();

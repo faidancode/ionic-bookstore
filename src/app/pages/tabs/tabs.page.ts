@@ -16,6 +16,7 @@ import {
   bookmark,
   journal,
   grid,
+  chevronForwardOutline,
 } from 'ionicons/icons';
 import { filter } from 'rxjs';
 
@@ -35,6 +36,7 @@ export class TabsPage {
       bagHandleOutline,
       bookmark,
       bookmarkOutline,
+      chevronForwardOutline,
       journal,
       journalOutline,
       grid,
