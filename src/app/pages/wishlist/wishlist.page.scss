@@ -33,28 +33,7 @@
   }
 }
 
-.empty-state {
-  text-align: center;
-  padding: 100px 40px;
-  ion-icon {
-    font-size: 4rem;
-    color: var(--atheneum-primary);
-    opacity: 0.2;
-  }
-  p {
-    margin: 20px 0;
-    font-size: 0.9rem;
-    opacity: 0.6;
-  }
-  .btn-outline {
-    background: transparent;
-    border: 1.5px solid var(--atheneum-primary);
-    padding: 12px 24px;
-    font-weight: 800;
-    font-size: 0.7rem;
-    letter-spacing: 2px;
-  }
-}
+
 
 .loading-center {
   display: flex;

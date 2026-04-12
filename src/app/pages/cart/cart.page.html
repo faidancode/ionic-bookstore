@@ -1,5 +1,10 @@
-<app-header title="Keranjang Belanja" backHref="/tabs/home" [showEndButton]="true" endIcon="bookmark-outline"
-  (onEndButtonClick)="toWishlist()">
+<app-header
+  title="Keranjang Belanja"
+  backHref="/tabs/home"
+  [showEndButton]="true"
+  endIcon="bookmark-outline"
+  (onEndButtonClick)="toWishlist()"
+>
 </app-header>
 <ion-content [fullscreen]="true" class="atheneum-content">
   <div class="cart-wrapper">
@@ -8,6 +13,7 @@
       <p class="item-count">{{ cart()?.items?.length || 0 }} ITEM TERPILIH</p>
     </header>
 
+    @if (cart()?.items?.length) {
     <div class="mobile-layout ion-hide-md-up">
       @for (item of cart()?.items; track item.id) {
       <div class="cart-item-mobile">
@@ -15,12 +21,21 @@
         <div class="item-info">
           <h3 class="title">{{ item.bookTitle }}</h3>
           <p class="price">{{ formatPrice(item.priceCentsAtAdd) }}</p>
+
           <div class="qty-control">
-            <button (click)="updateQty(item.bookId, item.quantity - 1)">
-              -
+            <button
+              (click)="updateQty(item.bookId, item.quantity - 1)"
+              class="action-btn"
+            >
+              @if (item.quantity === 1) {
+              <ion-icon name="trash-outline" color="danger"></ion-icon>
+              } @else { - }
             </button>
             <span>{{ item.quantity }}</span>
-            <button (click)="updateQty(item.bookId, item.quantity + 1)">
+            <button
+              (click)="updateQty(item.bookId, item.quantity + 1)"
+              class="action-btn"
+            >
               +
             </button>
           </div>
@@ -52,11 +67,19 @@
             <td>{{ formatPrice(item.priceCentsAtAdd) }}</td>
             <td>
               <div class="qty-control">
-                <button (click)="updateQty(item.bookId, item.quantity - 1)">
-                  -
+                <button
+                  (click)="updateQty(item.bookId, item.quantity - 1)"
+                  class="action-btn"
+                >
+                  @if (item.quantity === 1) {
+                  <ion-icon name="trash-outline" color="danger"></ion-icon>
+                  } @else { - }
                 </button>
                 <span>{{ item.quantity }}</span>
-                <button (click)="updateQty(item.bookId, item.quantity + 1)">
+                <button
+                  (click)="updateQty(item.bookId, item.quantity + 1)"
+                  class="action-btn"
+                >
                   +
                 </button>
               </div>
@@ -75,7 +98,17 @@
         <span>TOTAL PEMBAYARAN</span>
         <h2 class="total-amount">{{ formatPrice(totalBayar()) }}</h2>
       </div>
-      <button class="btn-checkout" (click)="checkout()">LANJUT KE PEMBAYARAN</button>
+      <button class="btn-checkout" (click)="checkout()">
+        LANJUT KE PEMBAYARAN
+      </button>
     </div>
+
+    } @else {
+    <div class="empty-state">
+      <ion-icon name="bag-handle-outline"></ion-icon>
+      <p>Belum ada buku di keranjang anda.</p>
+      <button class="btn-outline" routerLink="/tabs/home">JELAJAHI BUKU</button>
+    </div>
+    }
   </div>
 </ion-content>

@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { CartService } from 'src/app/core/services/cart.service';
 import { AuthService } from 'src/app/core/services/auth.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { addIcons } from 'ionicons';
 import { arrowBackOutline, bookmarkOutline } from 'ionicons/icons';
 import { AppHeaderComponent } from 'src/app/components/app-header/app-header.component';
@@ -11,7 +11,7 @@ import { AppHeaderComponent } from 'src/app/components/app-header/app-header.com
 @Component({
   selector: 'app-cart',
   standalone: true,
-  imports: [CommonModule, IonicModule, AppHeaderComponent],
+  imports: [CommonModule, IonicModule, AppHeaderComponent, RouterLink],
   templateUrl: './cart.page.html',
   styleUrls: ['./cart.page.scss'],
 })
@@ -49,7 +49,7 @@ export class CartPage implements OnInit {
     const user = this.authService.currentUser();
     if (!user?.id) return;
     this.cartService.getCartByUser(user.id).subscribe({
-      next: () => { },
+      next: () => {},
     });
   }
 
@@ -59,13 +59,16 @@ export class CartPage implements OnInit {
   updateQty(bookId: string | undefined, newQty: number) {
     if (!bookId) return;
 
-    // Jika jumlah kurang dari 1, kita bisa biarkan tetap 1
-    // atau panggil fungsi hapus (tergantung kebutuhan toko Anda)
-    if (newQty < 1) return;
-
     const user = this.authService.currentUser();
     if (!user?.id) return;
 
+    if (newQty < 1) {
+      this.cartService.removeItem(user.id, bookId).subscribe({
+        next: () => console.log('Item removed'),
+        error: (err) => console.error(err),
+      });
+      return; // Hentikan eksekusi agar tidak lanjut ke updateCartItemQuantity
+    }
     this.cartService.updateCartItemQuantity(user.id, bookId, newQty).subscribe({
       next: () => {
         // Berhasil diperbarui, Signal cart otomatis terupdate di service

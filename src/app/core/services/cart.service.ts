@@ -157,8 +157,13 @@ export class CartService {
   /**
    * Menghapus item dari keranjang (Optimistic)
    */
-  removeItem(userId: string, bookId: string) {
+  // Tambahkan return type yang jelas
+  removeItem(
+    userId: string,
+    bookId: string,
+  ): Observable<ApiResponse<CartWithItems> | null> {
     const prevCart = this._cart();
+
     if (!prevCart) return of(null);
 
     const updatedItemsForPayload = (prevCart.items || [])

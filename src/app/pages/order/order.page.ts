@@ -1,23 +1,19 @@
-import { Component, computed, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component, computed, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import {
   IonContent,
   IonHeader,
-  IonTitle,
-  IonToolbar,
-  IonSpinner,
   IonInfiniteScroll,
   IonInfiniteScrollContent,
-  IonButtons,
-  IonBackButton,
-  IonButton,
-  IonIcon,
+  IonSpinner,
+  IonTitle,
+  IonToolbar
 } from '@ionic/angular/standalone';
-import { OrderService } from 'src/app/core/services/order.service';
-import { AuthService } from 'src/app/core/services/auth.service';
-import { Router } from '@angular/router';
 import { AppHeaderComponent } from 'src/app/components/app-header/app-header.component';
+import { AuthService } from 'src/app/core/services/auth.service';
+import { OrderService } from 'src/app/core/services/order.service';
 
 @Component({
   selector: 'app-order',
@@ -32,10 +28,6 @@ import { AppHeaderComponent } from 'src/app/components/app-header/app-header.com
     IonSpinner,
     IonInfiniteScroll,
     IonInfiniteScrollContent,
-    IonButtons,
-    IonBackButton,
-    IonButton,
-    IonIcon,
     CommonModule,
     FormsModule,
     AppHeaderComponent,

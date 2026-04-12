@@ -12,9 +12,9 @@
       @if (showCart()) {
       <ion-button (click)="goToCart()" class="cart-btn">
         <ion-icon name="bag-handle-outline"></ion-icon>
-        <!-- @if (cartCount() > 0) { -->
+        @if (cartCount() > 0) {
         <span class="cart-badge">{{ cartCount() }}</span>
-        <!-- } -->
+        }
       </ion-button>
       } @else if (showEndButton()) {
       <ion-button (click)="handleEndClick()">

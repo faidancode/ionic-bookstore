@@ -95,3 +95,18 @@
   --width: 100%;
   --border-radius: 0;
 }
+
+.empty-state {
+  text-align: center;
+  padding: 100px 40px;
+  ion-icon {
+    font-size: 4rem;
+    color: var(--atheneum-primary);
+    opacity: 0.2;
+  }
+  p {
+    margin: 20px 0;
+    font-size: 0.9rem;
+    opacity: 0.6;
+  }
+}

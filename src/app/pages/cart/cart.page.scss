@@ -139,3 +139,81 @@
     letter-spacing: 2px;
   }
 }
+
+/* Empty State Styling */
+.empty-cart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  text-align: center;
+
+  .empty-icon-wrapper {
+    font-size: 5rem;
+    color: var(--atheneum-divider);
+    margin-bottom: 20px;
+    border: 2px dashed var(--atheneum-divider);
+    padding: 30px;
+    border-radius: 50%;
+  }
+
+  h2 {
+    font-family: var(--app-font-display);
+    font-size: 1.8rem;
+    color: var(--atheneum-primary);
+    margin-bottom: 10px;
+  }
+
+  p {
+    max-width: 300px;
+    opacity: 0.6;
+    margin-bottom: 30px;
+    line-height: 1.5;
+  }
+
+  .btn-browse {
+    background: var(--atheneum-primary);
+    color: white;
+    padding: 15px 40px;
+    border: none;
+    font-weight: 800;
+    letter-spacing: 2px;
+    box-shadow: 6px 6px 0px var(--atheneum-divider);
+
+    &:active {
+      transform: translate(3px, 3px);
+      box-shadow: none;
+    }
+  }
+}
+
+/* Qty Control Buttons Styling */
+.qty-control {
+  .action-btn {
+    background: transparent;
+    border: 1px solid var(--atheneum-divider);
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background: var(--atheneum-divider);
+    }
+
+    ion-icon {
+      font-size: 1.1rem;
+    }
+  }
+
+  span {
+    padding: 0 15px;
+    font-weight: 800;
+    font-size: 0.9rem;
+  }
+}

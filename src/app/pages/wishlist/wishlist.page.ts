@@ -14,7 +14,13 @@ import { AppHeaderComponent } from 'src/app/components/app-header/app-header.com
   templateUrl: './wishlist.page.html',
   styleUrls: ['./wishlist.page.scss'],
   standalone: true,
-  imports: [CommonModule, IonicModule, RouterLink, BookCardComponent, AppHeaderComponent],
+  imports: [
+    CommonModule,
+    IonicModule,
+    RouterLink,
+    BookCardComponent,
+    AppHeaderComponent,
+  ],
 })
 export class WishlistPage implements OnInit {
   private router = inject(Router);
@@ -37,7 +43,8 @@ export class WishlistPage implements OnInit {
     return data?.items || [];
   });
 
-  ngOnInit() {
+  ngOnInit() {};
+  ionViewDidEnter() {
     this.loadWishlist();
   }
 

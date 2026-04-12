@@ -1,6 +1,6 @@
+import { Location } from '@angular/common';
 import { Component, computed, inject, input, output } from '@angular/core';
 import { Router } from '@angular/router';
-import { NavController } from '@ionic/angular';
 import {
   IonHeader,
   IonToolbar,
@@ -33,11 +33,12 @@ export class AppHeaderComponent {
   // Input menggunakan Signal (Required atau Optional dengan default)
   private cartService = inject(CartService);
   private router = inject(Router);
+  private location = inject(Location);
 
   title = input<string>('');
   hideBackButton = input<boolean>(false);
   showEndButton = input<boolean>(true);
-  backHref = input<string>('/tabs/home');
+  backHref = input<string>('');
   endIcon = input<string>('');
 
   showCart = input<boolean>(true);
@@ -59,8 +60,15 @@ export class AppHeaderComponent {
   });
 
   ngOnInit() {
-    // Membaca signal di ngOnInit untuk log diperbolehkan
     console.log('Current Cart Count:', this.cartCount());
+  }
+
+  handleBack() {
+    if (this.backHref()) {
+      this.router.navigateByUrl(this.backHref());
+    } else {
+      this.location.back();
+    }
   }
 
   handleEndClick() {
