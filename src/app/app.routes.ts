@@ -51,6 +51,11 @@ export const routes: Routes = [
       import('./pages/category/category.page').then((m) => m.CategoryPage),
   },
   {
+    path: 'book-list',
+    loadComponent: () =>
+      import('./pages/book-list/book-list.page').then((m) => m.BookListPage),
+  },
+  {
     path: 'book-detail/:slug',
     loadComponent: () =>
       import('./pages/book-detail/book-detail.page').then(
@@ -81,7 +86,8 @@ export const routes: Routes = [
   },
   {
     path: 'checkout',
-    loadComponent: () => import('./pages/checkout/checkout.page').then(m => m.CheckoutPage)
+    loadComponent: () =>
+      import('./pages/checkout/checkout.page').then((m) => m.CheckoutPage),
   },
   {
     path: '',
@@ -93,5 +99,4 @@ export const routes: Routes = [
     path: '**',
     redirectTo: 'tabs/home',
   },
-
 ];

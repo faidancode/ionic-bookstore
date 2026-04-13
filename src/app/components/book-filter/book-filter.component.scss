@@ -1,0 +1,100 @@
+.atheneum-filter {
+  padding: 16px;
+  background: var(--atheneum-bg);
+
+  .filter-section {
+    margin-bottom: 32px;
+
+    .section-label {
+      display: block;
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--atheneum-primary);
+      margin-bottom: 12px;
+      opacity: 0.8;
+    }
+  }
+}
+
+/* Custom Ion Select */
+.atheneum-ion-select {
+  --background: var(--atheneum-surface);
+  --border-color: var(--atheneum-divider);
+  --border-width: 1.5px;
+  --padding-start: 12px;
+  --padding-end: 12px;
+  min-height: 48px;
+  border: 1.5px solid var(--atheneum-divider);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+/* Custom Ion Input */
+.atheneum-ion-input {
+  --background: var(--atheneum-surface);
+  --border-color: var(--atheneum-divider);
+  --border-radius: 0;
+  --padding-start: 12px;
+  font-weight: 600;
+  font-size: 0.85rem;
+
+  .currency-label {
+    font-size: 0.7rem;
+    font-weight: 800;
+    opacity: 0.5;
+  }
+
+  &.has-focus {
+    --border-color: var(--atheneum-primary);
+  }
+}
+
+.price-inputs {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  .divider {
+    font-weight: 800;
+    opacity: 0.2;
+  }
+}
+
+/* Modern Category Grid */
+.category-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+
+  .category-btn {
+    background: transparent;
+    border: 1.5px solid var(--atheneum-divider);
+    padding: 8px 16px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--atheneum-text);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+
+    ion-icon {
+      font-size: 1rem;
+      color: white;
+    }
+
+    &.is-active {
+      background: var(--atheneum-primary);
+      color: white;
+      border-color: var(--atheneum-primary);
+      box-shadow: 4px 4px 0px rgba(var(--atheneum-primary-rgb), 0.2);
+    }
+
+    &:hover:not(.is-active) {
+      border-color: var(--atheneum-primary);
+    }
+  }
+}

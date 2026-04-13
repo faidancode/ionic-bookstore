@@ -1,0 +1,84 @@
+.home-header {
+    padding: 20px;
+    background: var(--atheneum-bg);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto auto;
+    gap: 20px 0;
+
+    .brand {
+        grid-column: 1;
+        grid-row: 1;
+        display: flex;
+        flex-direction: column;
+
+        .logo-text {
+            font-family: var(--app-font-display);
+            font-size: 1.5rem;
+            font-weight: 900;
+            letter-spacing: -1px;
+            color: var(--atheneum-primary);
+            line-height: 1;
+        }
+
+        .tagline {
+            font-size: 0.5rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            opacity: 0.4;
+        }
+    }
+
+    .actions {
+        grid-column: 2;
+        grid-row: 1;
+        display: flex;
+        align-items: center;
+    }
+
+    .search-trigger {
+        grid-column: 1 / -1;
+        grid-row: 2;
+        background: var(--atheneum-surface);
+        border: 1.5px solid var(--atheneum-divider);
+        padding: 14px 20px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        color: var(--atheneum-text);
+        opacity: 0.6;
+        transition: all 0.2s ease;
+
+        &:active {
+            transform: scale(0.98);
+            border-color: var(--atheneum-primary);
+        }
+
+        ion-icon {
+            font-size: 1.2rem;
+        }
+
+        span {
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+    }
+}
+
+@media (min-width: 768px) {
+    .home-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+
+        .brand, .actions, .search-trigger {
+            margin: 0;
+        }
+
+        .search-trigger {
+            flex: 1;
+            max-width: 500px;
+        }
+    }
+}

@@ -1,0 +1,171 @@
+.container {
+  padding: 40px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.page-header {
+  margin-bottom: 50px;
+
+  .display-title {
+    font-family: var(--app-font-display);
+    font-size: 3.5rem;
+    font-weight: 800;
+    line-height: 0.9;
+    color: var(--atheneum-primary);
+    margin: 0;
+
+    span {
+      -webkit-text-stroke: 1px var(--atheneum-primary);
+      color: transparent;
+    }
+  }
+
+  .results-count {
+    margin-top: 15px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    opacity: 0.5;
+  }
+}
+
+.main-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+
+  @media (min-width: 992px) {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 60px;
+    align-items: start;
+  }
+}
+
+/* Sidebar Styling */
+.sidebar-filter {
+  position: sticky;
+  top: 20px;
+}
+
+.mobile-filter-trigger {
+  margin-bottom: 20px;
+  border-bottom: 1.5px solid var(--atheneum-divider);
+  padding-bottom: 20px;
+}
+
+/* Book Grid */
+.book-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); // Default mobile 2 kolom
+  gap: 20px;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @media (min-width: 1200px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Skeleton Loader */
+.skeleton-card {
+  aspect-ratio: 2/3;
+  background: var(--atheneum-divider);
+  opacity: 0.3;
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(90deg,
+        transparent,
+        rgba(255, 255, 255, 0.4),
+        transparent);
+    animation: shimmer 1.5s infinite;
+  }
+}
+
+.empty-state {
+  text-align: center;
+  padding: 100px 20px;
+  border: 2px dashed var(--atheneum-divider);
+
+  p {
+    font-family: var(--app-font-display);
+    font-size: 1.2rem;
+    color: var(--atheneum-primary);
+    opacity: 0.6;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+ion-infinite-scroll {
+  margin-top: 40px;
+
+  ion-infinite-scroll-content {
+    --color: var(--atheneum-primary);
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-size: 0.7rem;
+  }
+}
+
+.mobile-filter-actions {
+  margin-bottom: 20px;
+
+  .btn-filter-trigger {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 14px;
+    background: var(--atheneum-surface);
+    border: 1.5px solid var(--atheneum-primary);
+    color: var(--atheneum-primary);
+    font-weight: 800;
+    font-size: 0.75rem;
+    letter-spacing: 1.5px;
+    position: relative;
+
+    .badge {
+      background: var(--atheneum-primary);
+      color: white;
+      font-size: 0.6rem;
+      padding: 2px 6px;
+      border-radius: 10px;
+      margin-left: 5px;
+    }
+  }
+}
+
+/* CSS khusus untuk Modal Sheet */
+ion-modal {
+  --border-radius: 0;
+  --background: var(--atheneum-bg);
+
+  &::part(handle) {
+    background: var(--atheneum-primary);
+    width: 40px;
+  }
+}

@@ -1,0 +1,39 @@
+<form [formGroup]="filterForm" class="atheneum-filter">
+  <div class="filter-section">
+    <label class="section-label">Urutkan</label>
+    <ion-select label-placement="stacked" toggle-icon="chevron-down-outline" interface="popover" formControlName="sort"
+      class="atheneum-ion-select">
+      <ion-select-option value="createdAt:desc">Terbaru</ion-select-option>
+      <ion-select-option value="priceCents:desc">Harga Tertinggi</ion-select-option>
+      <ion-select-option value="priceCents:asc">Harga Terendah</ion-select-option>
+    </ion-select>
+  </div>
+
+  <div class="filter-section">
+    <label class="section-label">Rentang Harga</label>
+    <div class="price-inputs">
+      <ion-input type="number" formControlName="minPrice" placeholder="Min" fill="outline" class="atheneum-ion-input">
+        <div slot="label" class="currency-label">Rp</div>
+      </ion-input>
+      <span class="divider">—</span>
+      <ion-input type="number" formControlName="maxPrice" placeholder="Max" fill="outline" class="atheneum-ion-input">
+        <div slot="label" class="currency-label">Rp</div>
+      </ion-input>
+    </div>
+  </div>
+
+  <div class="filter-section">
+    <label class="section-label">Kategori</label>
+    <div class="category-grid">
+      @for (cat of categories(); track cat.id) {
+      <button type="button" class="category-btn"
+        [class.is-active]="filterForm.get('categories')?.value.includes(cat.slug)" (click)="toggleCategory(cat.slug)">
+        {{ cat.name }}
+        @if (filterForm.get('categories')?.value.includes(cat.slug)) {
+        <ion-icon name="close-circle"></ion-icon>
+        }
+      </button>
+      }
+    </div>
+  </div>
+</form>

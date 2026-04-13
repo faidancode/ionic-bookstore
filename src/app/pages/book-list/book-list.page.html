@@ -1,0 +1,52 @@
+<ion-content [fullscreen]="true" class="atheneum-content">
+  <div class="container">
+    <header class="page-header">
+      <h1 class="display-title">Jelajahi<br /><span>Katalog</span></h1>
+      <p class="results-count">
+        {{ books().length }} dari {{ total() }} buku ditemukan
+      </p>
+    </header>
+
+    <div class="main-layout">
+      <aside class="sidebar-filter ion-hide-md-down">
+        <app-book-filter [categories]="allCategories()" (filterChanged)="onFilterChange($event)">
+        </app-book-filter>
+      </aside>
+
+      <div class="content-area">
+        <div class="mobile-filter-actions ion-hide-md-up">
+          <button class="btn-filter-trigger" (click)="openFilterModal()">
+            <ion-icon name="options-outline"></ion-icon>
+            FILTER & URUTKAN
+            @if (activeFilterCount() > 0) {
+            <span class="badge">{{ activeFilterCount() }}</span>
+            }
+          </button>
+        </div>
+
+        @if (loading() && books().length === 0) {
+        <div class="book-grid">
+          @for (i of [1,2,3,4,5,6]; track i) {
+          <div class="skeleton-card"></div>
+          }
+        </div>
+        } @else if (books().length > 0) {
+        <div class="book-grid">
+          @for (book of books(); track book.id) {
+          <app-book-card [book]="book"></app-book-card>
+          }
+        </div>
+        } @else {
+        <div class="empty-state">
+          <p>Tidak ada buku yang sesuai dengan filter Anda.</p>
+        </div>
+        }
+
+        <ion-infinite-scroll (ionInfinite)="loadMore($event)">
+          <ion-infinite-scroll-content loadingSpinner="dots" loadingText="Memuat lebih banyak koleksi...">
+          </ion-infinite-scroll-content>
+        </ion-infinite-scroll>
+      </div>
+    </div>
+  </div>
+</ion-content>
